@@ -1,0 +1,233 @@
+<!doctype html>
+<!-- Đổi data-theme="cream" thành data-theme="red" để dùng bộ nền đỏ -->
+<html lang="vi" data-theme="cream">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lâm &amp; Nhi — Thiệp cưới</title>
+<meta name="description" content="Thiệp cưới online của Lâm và Nhi. Trân trọng kính mời quý khách đến chung vui cùng gia đình chúng tôi.">
+<meta property="og:title" content="Lâm &amp; Nhi — Thiệp cưới">
+<meta property="og:description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình chúng tôi.">
+<meta property="og:image" content="images/bg-cream-gold-frame.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&amp;family=Dancing+Script:wght@500&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="is-locked">
+
+<!-- ============================================================
+     BÌA THIỆP — màn hình đầu tiên, bấm "Mở thiệp" để vào trong
+     ============================================================ -->
+<section class="cover" id="cover">
+  <div class="cover__inner">
+    <p class="eyebrow">Thân Mời</p>
+    <div class="seal" aria-hidden="true">囍</div>
+    <h1 class="names">Lâm<span>&amp;</span>Nhi</h1>
+    <p class="cover__date">20 . 12 . 2026</p>
+    <button class="btn-open" id="openBtn" type="button">Mở thiệp</button>
+  </div>
+</section>
+
+
+<main class="card" id="card" hidden>
+
+  <!-- ============================================================
+       1. LỜI MỜI
+       ============================================================ -->
+  <section class="s reveal">
+    <p class="s__label">Save the date</p>
+    <h2 class="s__title">Trân trọng kính mời</h2>
+    <div class="divider"></div>
+    <p class="lead">
+      Chúng tôi rất hân hạnh được đón tiếp quý khách đến chung vui
+      trong ngày trọng đại của cuộc đời mình. Sự hiện diện của quý khách
+      là niềm vinh hạnh lớn lao cho gia đình chúng tôi.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       2. NHÀ TRAI — NHÀ GÁI
+       ============================================================ -->
+  <section class="s s--band reveal">
+    <p class="s__label">Gia đình</p>
+    <h2 class="s__title">Hai họ</h2>
+    <div class="families">
+      <div class="family">
+        <h3>Nhà trai</h3>
+        <p>Ông Nguyễn Văn A</p>
+        <p>Bà Trần Thị B</p>
+        <p class="family__role">Trưởng nam</p>
+        <p class="family__name">Nguyễn Hoàng Lâm</p>
+      </div>
+      <div class="family">
+        <h3>Nhà gái</h3>
+        <p>Ông Lê Văn C</p>
+        <p>Bà Phạm Thị D</p>
+        <p class="family__role">Thứ nữ</p>
+        <p class="family__name">Lê Yến Nhi</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. SỰ KIỆN
+       ============================================================ -->
+  <section class="s reveal">
+    <p class="s__label">Chương trình</p>
+    <h2 class="s__title">Sự kiện cưới</h2>
+    <div class="divider"></div>
+    <div class="events">
+      <article class="event">
+        <h3 class="event__name">Lễ Vu Quy</h3>
+        <p class="event__when">08:00 — Thứ Bảy, 19 / 12 / 2026</p>
+        <p class="event__where">Tư gia nhà gái · 123 Đường ABC, Quận 1, TP. Hồ Chí Minh</p>
+      </article>
+      <article class="event">
+        <h3 class="event__name">Lễ Thành Hôn</h3>
+        <p class="event__when">09:00 — Chủ Nhật, 20 / 12 / 2026</p>
+        <p class="event__where">Tư gia nhà trai · 456 Đường XYZ, Quận 3, TP. Hồ Chí Minh</p>
+      </article>
+      <article class="event">
+        <h3 class="event__name">Tiệc Cưới</h3>
+        <p class="event__when">18:00 — Chủ Nhật, 20 / 12 / 2026</p>
+        <p class="event__where">Trung tâm Hội nghị Tiệc cưới · 789 Đường DEF, Quận 5</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. ĐẾM NGƯỢC
+       ============================================================ -->
+  <section class="s s--band reveal">
+    <p class="s__label">Còn lại</p>
+    <h2 class="s__title">Đếm ngược đến ngày cưới</h2>
+    <div class="countdown" id="countdown">
+      <div class="cd__box"><div class="cd__num" data-cd="days">--</div><div class="cd__lab">Ngày</div></div>
+      <div class="cd__box"><div class="cd__num" data-cd="hours">--</div><div class="cd__lab">Giờ</div></div>
+      <div class="cd__box"><div class="cd__num" data-cd="mins">--</div><div class="cd__lab">Phút</div></div>
+      <div class="cd__box"><div class="cd__num" data-cd="secs">--</div><div class="cd__lab">Giây</div></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. ĐỊA ĐIỂM + BẢN ĐỒ
+       ============================================================ -->
+  <section class="s reveal">
+    <p class="s__label">Địa điểm</p>
+    <h2 class="s__title">Trung tâm Hội nghị Tiệc cưới</h2>
+    <div class="divider"></div>
+    <p class="lead">789 Đường DEF, Phường 1, Quận 5, TP. Hồ Chí Minh</p>
+    <iframe class="map" id="map" title="Bản đồ đến địa điểm tiệc cưới"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <a class="btn-link" id="mapLink" href="#" target="_blank" rel="noopener">Chỉ đường</a>
+  </section>
+
+  <!-- ============================================================
+       6. ALBUM — thay bằng ảnh cưới thật trong images/album/
+       ============================================================ -->
+  <section class="s reveal">
+    <p class="s__label">Khoảnh khắc</p>
+    <h2 class="s__title">Album ảnh cưới</h2>
+    <div class="divider"></div>
+    <div class="album" id="album"></div>
+  </section>
+
+  <!-- ============================================================
+       7. XÁC NHẬN THAM DỰ (RSVP)
+       ============================================================ -->
+  <section class="s s--band reveal">
+    <p class="s__label">RSVP</p>
+    <h2 class="s__title">Xác nhận tham dự</h2>
+    <p class="lead">Vui lòng phản hồi trước ngày 10 / 12 / 2026 để gia đình tiện sắp xếp chỗ ngồi.</p>
+    <form class="form" id="rsvpForm" novalidate>
+      <div class="field">
+        <label for="rsvpName">Họ và tên</label>
+        <input type="text" id="rsvpName" name="name" required autocomplete="name" placeholder="Nguyễn Văn A">
+      </div>
+      <div class="field">
+        <label for="rsvpSide">Khách mời của</label>
+        <select id="rsvpSide" name="side">
+          <option value="Nhà trai">Nhà trai</option>
+          <option value="Nhà gái">Nhà gái</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="rsvpAttend">Bạn có tham dự được không?</label>
+        <select id="rsvpAttend" name="attend">
+          <option value="Có">Có, tôi sẽ đến</option>
+          <option value="Không">Rất tiếc, tôi không đến được</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="rsvpCount">Số người tham dự</label>
+        <input type="number" id="rsvpCount" name="guests" min="1" max="10" value="1">
+      </div>
+      <button class="btn-submit" type="submit">Gửi xác nhận</button>
+      <p class="form__note" id="rsvpNote" role="status"></p>
+    </form>
+  </section>
+
+  <!-- ============================================================
+       8. LỜI CHÚC
+       ============================================================ -->
+  <section class="s reveal">
+    <p class="s__label">Sổ lưu bút</p>
+    <h2 class="s__title">Gửi lời chúc</h2>
+    <div class="divider"></div>
+    <form class="form" id="wishForm" novalidate>
+      <div class="field">
+        <label for="wishName">Tên của bạn</label>
+        <input type="text" id="wishName" name="name" required placeholder="Nguyễn Văn A">
+      </div>
+      <div class="field">
+        <label for="wishText">Lời chúc</label>
+        <textarea id="wishText" name="message" required placeholder="Chúc hai bạn trăm năm hạnh phúc…"></textarea>
+      </div>
+      <button class="btn-submit" type="submit">Gửi lời chúc</button>
+      <p class="form__note" id="wishNote" role="status"></p>
+    </form>
+    <div class="wishes" id="wishList"></div>
+  </section>
+
+  <!-- ============================================================
+       9. MỪNG CƯỚI
+       ============================================================ -->
+  <section class="s s--band reveal">
+    <p class="s__label">Mừng cưới</p>
+    <h2 class="s__title">Hộp mừng cưới</h2>
+    <p class="lead">Sự hiện diện của quý khách đã là món quà quý giá nhất. Nếu ở xa, quý khách có thể gửi lời chúc qua đây.</p>
+    <div class="gifts" id="gifts"></div>
+  </section>
+
+  <!-- ============================================================
+       10. CẢM ƠN
+       ============================================================ -->
+  <footer class="s thanks reveal">
+    <div class="seal" aria-hidden="true">囍</div>
+    <h2 class="names">Lâm<span>&amp;</span>Nhi</h2>
+    <p class="lead">Trân trọng cảm ơn quý khách.</p>
+  </footer>
+
+</main>
+
+
+<!-- Xem ảnh phóng to -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Xem ảnh">
+  <button class="lightbox__close" id="lightboxClose" type="button" aria-label="Đóng">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- Nút nổi: đổi tông màu / bật tắt nhạc -->
+<div class="floating">
+  <button class="fbtn" id="themeBtn" type="button" title="Đổi tông màu kem / đỏ" aria-label="Đổi tông màu">◐</button>
+  <button class="fbtn" id="musicBtn" type="button" title="Bật / tắt nhạc" aria-label="Bật tắt nhạc">♪</button>
+</div>
+
+<audio id="bgm" loop preload="none"></audio>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
