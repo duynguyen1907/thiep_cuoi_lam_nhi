@@ -1,32 +1,47 @@
 <!doctype html>
-<!-- Đổi data-theme="cream" thành data-theme="red" để dùng bộ nền đỏ -->
-<html lang="vi" data-theme="cream">
+<html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lâm &amp; Nhi — Thiệp cưới</title>
-<meta name="description" content="Thiệp cưới online của Lâm và Nhi. Trân trọng kính mời quý khách đến chung vui cùng gia đình chúng tôi.">
-<meta property="og:title" content="Lâm &amp; Nhi — Thiệp cưới">
-<meta property="og:description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình chúng tôi.">
-<meta property="og:image" content="images/bg-cream-gold-frame.jpg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3a0d11">
+<title>Duy Lâm &amp; Yến Nhi — Thiệp cưới</title>
+<meta name="description" content="Thiệp cưới online của Phạm Duy Lâm và Lê Huỳnh Yến Nhi — 28.11.2026 tại TP. Hồ Chí Minh và 10.12.2026 tại Hà Nội.">
+<meta property="og:title" content="Duy Lâm &amp; Yến Nhi — Thiệp cưới">
+<meta property="og:description" content="Trân trọng kính mời quý khách đến chung vui cùng gia đình chúng tôi — 28.11.2026 tại TP. Hồ Chí Minh · 10.12.2026 tại Hà Nội.">
+<meta property="og:image" content="images/main_bg.jpg">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&amp;family=Dancing+Script:wght@500&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Lora:ital,wght@0,400;0,500;1,400&amp;family=The+Nautigal:wght@400;700&amp;family=Viaoda+Libre&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body class="is-locked">
 
+<!-- Tim bay lơ lửng trên nền đỏ (sinh bằng main.js) -->
+<div class="hearts" id="hearts" aria-hidden="true"></div>
+
+<!-- Tờ giấy main_bg làm nền thiệp; lớp "edge" phủ lên mép trên/dưới
+     để chữ cuộn tới đâu mờ dần tới đó, không đè lên khung vàng -->
+<div class="paper" aria-hidden="true"></div>
+<div class="paper paper--edge" aria-hidden="true"></div>
+
+
 <!-- ============================================================
-     BÌA THIỆP — màn hình đầu tiên, bấm "Mở thiệp" để vào trong
+     BÌA THIỆP — bấm "Mở thiệp" để vào trong
      ============================================================ -->
 <section class="cover" id="cover">
-  <div class="cover__inner">
-    <p class="eyebrow">Thân Mời</p>
-    <div class="seal" aria-hidden="true">囍</div>
-    <h1 class="names">Lâm<span>&amp;</span>Nhi</h1>
-    <p class="cover__date">20 . 12 . 2026</p>
+  <div class="cover__card">
+    <div class="cover__seal" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.6.8-1.4 2.3-2.6 4.4-2.6 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg>
+    </div>
+    <h1 class="cover__names">Duy Lâm<span>&amp;</span>Yến Nhi</h1>
+    <div class="ornament" aria-hidden="true"><span></span><i>❦</i><span></span></div>
+    <p class="cover__dates">
+      <span>28 . 11 . 2026 <small>TP. Hồ Chí Minh</small></span>
+      <span>10 . 12 . 2026 <small>Hà Nội</small></span>
+    </p>
+    <p class="cover__invite">Thân mời</p>
     <button class="btn-open" id="openBtn" type="button">Mở thiệp</button>
   </div>
 </section>
@@ -35,180 +50,247 @@
 <main class="card" id="card" hidden>
 
   <!-- ============================================================
-       1. LỜI MỜI
+       1. SAVE THE DATE
        ============================================================ -->
-  <section class="s reveal">
-    <p class="s__label">Save the date</p>
-    <h2 class="s__title">Trân trọng kính mời</h2>
-    <div class="divider"></div>
-    <p class="lead">
-      Chúng tôi rất hân hạnh được đón tiếp quý khách đến chung vui
-      trong ngày trọng đại của cuộc đời mình. Sự hiện diện của quý khách
-      là niềm vinh hạnh lớn lao cho gia đình chúng tôi.
-    </p>
+  <section class="s hero">
+    <p class="eyebrow">Save the date</p>
+    <img class="hero__illus" src="images/Artboard 2.png" alt="Hình minh hoạ cô dâu và chú rể" width="2100" height="1500">
+    <h2 class="hero__names">
+      <span>Duy Lâm</span>
+      <span class="hero__amp" aria-hidden="true">&amp;</span>
+      <span>Yến Nhi</span>
+    </h2>
+    <div class="hero__days">
+      <p><b>28 . 11 . 2026</b><small>TP. Hồ Chí Minh</small></p>
+      <p><b>10 . 12 . 2026</b><small>Hà Nội</small></p>
+    </div>
   </section>
 
   <!-- ============================================================
-       2. NHÀ TRAI — NHÀ GÁI
+       2. THÔNG TIN LỄ CƯỚI — hai họ + cô dâu chú rể
        ============================================================ -->
-  <section class="s s--band reveal">
-    <p class="s__label">Gia đình</p>
-    <h2 class="s__title">Hai họ</h2>
-    <div class="families">
-      <div class="family">
-        <h3>Nhà trai</h3>
-        <p>Ông Nguyễn Văn A</p>
-        <p>Bà Trần Thị B</p>
-        <p class="family__role">Trưởng nam</p>
-        <p class="family__name">Nguyễn Hoàng Lâm</p>
+  <section class="s reveal">
+    <div class="panel">
+      <h2 class="panel__title">Thông tin lễ cưới</h2>
+      <div class="families">
+        <div class="family">
+          <p class="family__side">Nhà trai</p>
+          <p class="family__label">Ông Bà</p>
+          <p class="family__parent">Phạm Văn Duy</p>
+          <p class="family__parent">Nguyễn Thị Thu Thủy</p>
+          <p class="family__addr">Mai Hiên, Mai Lâm, Đông Anh,<br>Thành phố Hà Nội</p>
+        </div>
+        <div class="family">
+          <p class="family__side">Nhà gái</p>
+          <p class="family__label">Ông Bà</p>
+          <p class="family__parent">Lê Thanh Hải</p>
+          <!-- Bản PDF TP.HCM ghi "Huỳnh Thị Xanh", bản Hà Nội ghi "Huỳnh Thị Thanh" — cần xác nhận -->
+          <p class="family__parent">Huỳnh Thị Xanh</p>
+          <p class="family__addr">Tân Thuận Tây, Tân Thuận,<br>Thành phố Hồ Chí Minh</p>
+        </div>
       </div>
-      <div class="family">
-        <h3>Nhà gái</h3>
-        <p>Ông Lê Văn C</p>
-        <p>Bà Phạm Thị D</p>
-        <p class="family__role">Thứ nữ</p>
-        <p class="family__name">Lê Yến Nhi</p>
+
+      <p class="panel__announce">Trân trọng báo tin<br>lễ thành hôn<br>của con chúng tôi</p>
+
+      <div class="couple">
+        <div class="couple__person">
+          <p class="couple__name">Phạm Duy Lâm</p>
+          <p class="couple__role">Trưởng nam</p>
+        </div>
+        <p class="couple__amp" aria-hidden="true">&amp;</p>
+        <div class="couple__person">
+          <p class="couple__name">Lê Huỳnh Yến Nhi</p>
+          <p class="couple__role">Trưởng nữ</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       3. SỰ KIỆN
+       3. THƯ MỜI TIỆC CƯỚI — mỗi nơi một thẻ, nút lấy dữ liệu từ CONFIG.events
        ============================================================ -->
   <section class="s reveal">
-    <p class="s__label">Chương trình</p>
-    <h2 class="s__title">Sự kiện cưới</h2>
-    <div class="divider"></div>
-    <div class="events">
-      <article class="event">
-        <h3 class="event__name">Lễ Vu Quy</h3>
-        <p class="event__when">08:00 — Thứ Bảy, 19 / 12 / 2026</p>
-        <p class="event__where">Tư gia nhà gái · 123 Đường ABC, Quận 1, TP. Hồ Chí Minh</p>
-      </article>
-      <article class="event">
-        <h3 class="event__name">Lễ Thành Hôn</h3>
-        <p class="event__when">09:00 — Chủ Nhật, 20 / 12 / 2026</p>
-        <p class="event__where">Tư gia nhà trai · 456 Đường XYZ, Quận 3, TP. Hồ Chí Minh</p>
-      </article>
-      <article class="event">
-        <h3 class="event__name">Tiệc Cưới</h3>
-        <p class="event__when">18:00 — Chủ Nhật, 20 / 12 / 2026</p>
-        <p class="event__where">Trung tâm Hội nghị Tiệc cưới · 789 Đường DEF, Quận 5</p>
-      </article>
+    <p class="kicker">Trân trọng kính mời</p>
+    <h2 class="s__title">Thư mời tiệc cưới</h2>
+    <p class="lead">Vui lòng đến dự buổi tiệc chung vui cùng gia đình chúng tôi</p>
+
+    <article class="party">
+      <p class="party__city">TP. Hồ Chí Minh</p>
+      <h3 class="party__name">Tiệc cưới nhà gái</h3>
+      <p class="party__when">Thứ Bảy — 18 : 00</p>
+      <p class="party__date">28 . 11 . 2026</p>
+      <p class="lunar">(Nhằm ngày 20 tháng 10 năm Bính Ngọ)</p>
+      <div class="party__times">
+        <p><small>Đón khách</small>18 : 00</p>
+        <p><small>Khai tiệc</small>19 : 00</p>
+      </div>
+      <p class="party__at">Tại</p>
+      <p class="party__venue"><small>Trung tâm Hội nghị Tiệc cưới</small>Asiana Plaza</p>
+      <p class="party__addr">284 – 286 Vườn Lài, Phường Phú Thọ Hòa,<br>Quận Tân Phú, TP. Hồ Chí Minh</p>
+      <div class="party__actions">
+        <a class="btn-pill" data-map="sg-party" href="#" target="_blank" rel="noopener">Chỉ đường</a>
+        <a class="btn-pill btn-pill--ghost" data-cal="sg-party" href="#" target="_blank" rel="noopener">Thêm vào lịch</a>
+      </div>
+    </article>
+
+    <article class="party">
+      <p class="party__city">Hà Nội</p>
+      <h3 class="party__name">Tiệc cưới nhà trai</h3>
+      <p class="party__when">Thứ Năm — 12 : 00</p>
+      <p class="party__date">10 . 12 . 2026</p>
+      <p class="lunar">(Nhằm ngày 02 tháng 11 năm Bính Ngọ)</p>
+      <p class="party__at">Tại</p>
+      <p class="party__venue"><small>Nhà văn hoá</small>Thôn Mai Hiên</p>
+      <p class="party__addr">Xã Đông Anh, TP. Hà Nội<br>(Thôn Mai Hiên, xã Mai Lâm, huyện Đông Anh, Hà Nội)</p>
+      <div class="party__actions">
+        <a class="btn-pill" data-map="hn-party" href="#" target="_blank" rel="noopener">Chỉ đường</a>
+        <a class="btn-pill btn-pill--ghost" data-cal="hn-party" href="#" target="_blank" rel="noopener">Thêm vào lịch</a>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============================================================
+       4. LỊCH CƯỚI + ĐẾM NGƯỢC — lịch và ngày khoanh tim sinh từ CONFIG.events
+       ============================================================ -->
+  <section class="s reveal">
+    <p class="kicker">Save the date</p>
+    <h2 class="s__title">Lịch cưới</h2>
+    <div class="calendars" id="calendars"></div>
+    <div class="countdown-wrap">
+      <p class="countdown__label" id="countdownLabel">Còn lại</p>
+      <div class="countdown" id="countdown">
+        <div class="cd__box"><div class="cd__num" data-cd="days">--</div><div class="cd__lab">Ngày</div></div>
+        <div class="cd__box"><div class="cd__num" data-cd="hours">--</div><div class="cd__lab">Giờ</div></div>
+        <div class="cd__box"><div class="cd__num" data-cd="mins">--</div><div class="cd__lab">Phút</div></div>
+        <div class="cd__box"><div class="cd__num" data-cd="secs">--</div><div class="cd__lab">Giây</div></div>
+      </div>
     </div>
   </section>
 
   <!-- ============================================================
-       4. ĐẾM NGƯỢC
+       5. LỊCH TRÌNH TIỆC TP.HCM — theo trang 4 của PDF TP.HCM
        ============================================================ -->
-  <section class="s s--band reveal">
-    <p class="s__label">Còn lại</p>
-    <h2 class="s__title">Đếm ngược đến ngày cưới</h2>
-    <div class="countdown" id="countdown">
-      <div class="cd__box"><div class="cd__num" data-cd="days">--</div><div class="cd__lab">Ngày</div></div>
-      <div class="cd__box"><div class="cd__num" data-cd="hours">--</div><div class="cd__lab">Giờ</div></div>
-      <div class="cd__box"><div class="cd__num" data-cd="mins">--</div><div class="cd__lab">Phút</div></div>
-      <div class="cd__box"><div class="cd__num" data-cd="secs">--</div><div class="cd__lab">Giây</div></div>
-    </div>
+  <section class="s reveal">
+    <p class="kicker">Schedule</p>
+    <h2 class="s__title">Lịch trình tiệc cưới</h2>
+    <p class="lead lead--small">Thứ Bảy, 28 . 11 . 2026 · Asiana Plaza</p>
+    <ol class="timeline">
+      <li class="tl">
+        <img class="tl__icon" src="images/PNG 1.png" alt="" width="1094" height="553">
+        <p class="tl__time">18:00<br>~ 18:30</p>
+        <div class="tl__body">
+          <p class="tl__tag">Welcome</p>
+          <p class="tl__vi">Đón khách, check-in và chụp ảnh</p>
+          <p class="tl__en">Guests meet and greet, check-in and photos</p>
+        </div>
+      </li>
+      <li class="tl">
+        <img class="tl__icon" src="images/PNG 2.png" alt="" width="388" height="321">
+        <p class="tl__time">19:00<br>~ 19:30</p>
+        <div class="tl__body">
+          <p class="tl__tag">Ceremony</p>
+          <p class="tl__vi">Cử hành hôn lễ</p>
+          <p class="tl__en">Wedding ceremony</p>
+        </div>
+      </li>
+      <li class="tl">
+        <img class="tl__icon" src="images/PNG 3.png" alt="" width="384" height="293">
+        <p class="tl__time">19:30<br>~ 21:00</p>
+        <div class="tl__body">
+          <p class="tl__tag">Dinner &amp; Music</p>
+          <p class="tl__vi">Khai tiệc và dùng bữa</p>
+          <p class="tl__en">Celebration dinner and music</p>
+        </div>
+      </li>
+      <li class="tl">
+        <span class="tl__icon" aria-hidden="true"></span>
+        <p class="tl__time">21:00<br>~ 21:30</p>
+        <div class="tl__body">
+          <p class="tl__tag">Gameshow</p>
+          <p class="tl__vi">Trò chơi có thưởng</p>
+          <p class="tl__en">Gameshow with prize</p>
+        </div>
+      </li>
+      <li class="tl">
+        <img class="tl__icon" src="images/PNG 4.png" alt="" width="345" height="459">
+        <p class="tl__time">21:30</p>
+        <div class="tl__body">
+          <p class="tl__tag">Thank you for coming</p>
+          <p class="tl__vi">Kết thúc buổi tiệc</p>
+          <p class="tl__en">The end of the party</p>
+        </div>
+      </li>
+    </ol>
   </section>
 
   <!-- ============================================================
-       5. ĐỊA ĐIỂM + BẢN ĐỒ
+       6. ALBUM — hiện ra khi có ảnh trong CONFIG.album
        ============================================================ -->
-  <section class="s reveal">
-    <p class="s__label">Địa điểm</p>
-    <h2 class="s__title">Trung tâm Hội nghị Tiệc cưới</h2>
-    <div class="divider"></div>
-    <p class="lead">789 Đường DEF, Phường 1, Quận 5, TP. Hồ Chí Minh</p>
-    <iframe class="map" id="map" title="Bản đồ đến địa điểm tiệc cưới"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <a class="btn-link" id="mapLink" href="#" target="_blank" rel="noopener">Chỉ đường</a>
-  </section>
-
-  <!-- ============================================================
-       6. ALBUM — thay bằng ảnh cưới thật trong images/album/
-       ============================================================ -->
-  <section class="s reveal">
-    <p class="s__label">Khoảnh khắc</p>
+  <section class="s reveal" id="albumSection" hidden>
+    <p class="kicker">Khoảnh khắc</p>
     <h2 class="s__title">Album ảnh cưới</h2>
-    <div class="divider"></div>
     <div class="album" id="album"></div>
   </section>
 
   <!-- ============================================================
-       7. XÁC NHẬN THAM DỰ (RSVP)
-       ============================================================ -->
-  <section class="s s--band reveal">
-    <p class="s__label">RSVP</p>
-    <h2 class="s__title">Xác nhận tham dự</h2>
-    <p class="lead">Vui lòng phản hồi trước ngày 10 / 12 / 2026 để gia đình tiện sắp xếp chỗ ngồi.</p>
-    <form class="form" id="rsvpForm" novalidate>
-      <div class="field">
-        <label for="rsvpName">Họ và tên</label>
-        <input type="text" id="rsvpName" name="name" required autocomplete="name" placeholder="Nguyễn Văn A">
-      </div>
-      <div class="field">
-        <label for="rsvpSide">Khách mời của</label>
-        <select id="rsvpSide" name="side">
-          <option value="Nhà trai">Nhà trai</option>
-          <option value="Nhà gái">Nhà gái</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="rsvpAttend">Bạn có tham dự được không?</label>
-        <select id="rsvpAttend" name="attend">
-          <option value="Có">Có, tôi sẽ đến</option>
-          <option value="Không">Rất tiếc, tôi không đến được</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="rsvpCount">Số người tham dự</label>
-        <input type="number" id="rsvpCount" name="guests" min="1" max="10" value="1">
-      </div>
-      <button class="btn-submit" type="submit">Gửi xác nhận</button>
-      <p class="form__note" id="rsvpNote" role="status"></p>
-    </form>
-  </section>
-
-  <!-- ============================================================
-       8. LỜI CHÚC
+       7. XÁC NHẬN THAM DỰ
        ============================================================ -->
   <section class="s reveal">
-    <p class="s__label">Sổ lưu bút</p>
-    <h2 class="s__title">Gửi lời chúc</h2>
-    <div class="divider"></div>
-    <form class="form" id="wishForm" novalidate>
-      <div class="field">
-        <label for="wishName">Tên của bạn</label>
-        <input type="text" id="wishName" name="name" required placeholder="Nguyễn Văn A">
-      </div>
-      <div class="field">
-        <label for="wishText">Lời chúc</label>
-        <textarea id="wishText" name="message" required placeholder="Chúc hai bạn trăm năm hạnh phúc…"></textarea>
-      </div>
-      <button class="btn-submit" type="submit">Gửi lời chúc</button>
-      <p class="form__note" id="wishNote" role="status"></p>
-    </form>
-    <div class="wishes" id="wishList"></div>
+    <div class="panel">
+      <h2 class="panel__title">Xác nhận tham dự</h2>
+      <p class="panel__lead">Sự hiện diện của quý khách giúp gia đình tiện sắp xếp chỗ ngồi chu đáo hơn.</p>
+      <form class="form" id="rsvpForm" novalidate>
+        <div class="field">
+          <label for="rsvpName">Họ và tên</label>
+          <input type="text" id="rsvpName" name="name" required autocomplete="name" placeholder="Nguyễn Văn A">
+        </div>
+        <div class="field">
+          <label for="rsvpSide">Bạn là khách mời của</label>
+          <select id="rsvpSide" name="side">
+            <option value="Nhà trai">Nhà trai</option>
+            <option value="Nhà gái">Nhà gái</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rsvpAttend">Bạn sẽ dự tiệc tại</label>
+          <select id="rsvpAttend" name="attend">
+            <option value="TP.HCM 28/11">TP. Hồ Chí Minh · 28/11</option>
+            <option value="Hà Nội 10/12">Hà Nội · 10/12</option>
+            <option value="Cả hai">Cả hai buổi tiệc</option>
+            <option value="Không">Rất tiếc, tôi không đến được</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="rsvpCount">Số người tham dự</label>
+          <input type="number" id="rsvpCount" name="guests" min="1" max="10" value="1">
+        </div>
+        <button class="btn-submit" type="submit">Gửi xác nhận</button>
+        <p class="form__note" id="rsvpNote" role="status"></p>
+      </form>
+    </div>
   </section>
 
   <!-- ============================================================
-       9. MỪNG CƯỚI
+       8. HỘP QUÀ MỪNG — tự ẩn khi chưa điền số tài khoản trong CONFIG.banks
        ============================================================ -->
-  <section class="s s--band reveal">
-    <p class="s__label">Mừng cưới</p>
-    <h2 class="s__title">Hộp mừng cưới</h2>
-    <p class="lead">Sự hiện diện của quý khách đã là món quà quý giá nhất. Nếu ở xa, quý khách có thể gửi lời chúc qua đây.</p>
-    <div class="gifts" id="gifts"></div>
+  <section class="s reveal" id="giftSection" hidden>
+    <p class="kicker">Mừng cưới</p>
+    <h2 class="s__title">Hộp quà mừng</h2>
+    <button class="giftbox" id="giftToggle" type="button" aria-expanded="false" aria-controls="gifts">
+      <span class="giftbox__lid" aria-hidden="true"></span>
+      <span class="giftbox__body" aria-hidden="true"></span>
+      <span class="giftbox__hint">Nhấn để mở</span>
+    </button>
+    <div class="gifts" id="gifts" hidden></div>
   </section>
 
   <!-- ============================================================
-       10. CẢM ƠN
+       9. CẢM ƠN
        ============================================================ -->
   <footer class="s thanks reveal">
-    <div class="seal" aria-hidden="true">囍</div>
-    <h2 class="names">Lâm<span>&amp;</span>Nhi</h2>
-    <p class="lead">Trân trọng cảm ơn quý khách.</p>
+    <p class="thanks__quote">Sự hiện diện của quý khách<br>là món quà quý giá nhất<br>trong ngày vui của chúng tôi.</p>
+    <div class="ornament ornament--ink" aria-hidden="true"><span></span><i>❦</i><span></span></div>
+    <p class="thanks__names">Duy Lâm <span>&amp;</span> Yến Nhi</p>
   </footer>
 
 </main>
@@ -220,9 +302,8 @@
   <img id="lightboxImg" src="" alt="">
 </div>
 
-<!-- Nút nổi: đổi tông màu / bật tắt nhạc -->
+<!-- Nút bật / tắt nhạc -->
 <div class="floating">
-  <button class="fbtn" id="themeBtn" type="button" title="Đổi tông màu kem / đỏ" aria-label="Đổi tông màu">◐</button>
   <button class="fbtn" id="musicBtn" type="button" title="Bật / tắt nhạc" aria-label="Bật tắt nhạc">♪</button>
 </div>
 

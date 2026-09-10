@@ -5,34 +5,42 @@
 
 const CONFIG = {
 
-  /* Thời điểm dùng cho đồng hồ đếm ngược.
-     Định dạng: "YYYY-MM-DDTHH:mm:ss+07:00" (giờ Việt Nam). */
-  weddingDate: '2026-12-20T18:00:00+07:00',
+  /* Các sự kiện, theo hai file PDF (TP.HCM v1.1 và Hà Nội v1.1.2).
+     Định dạng giờ: "YYYY-MM-DDTHH:mm:ss+07:00" (giờ Việt Nam).
+     - map:       địa chỉ tra trên Google Maps cho nút "Chỉ đường"
+     - end:       giờ kết thúc, chỉ dùng cho nút "Thêm vào lịch" (bỏ trống = +2 giờ)
+     - countdown: true thì đồng hồ đếm ngược tới sự kiện này
+     - city:      tên hiện dưới ngày được khoanh tim trên lịch */
+  events: [
+    { id: 'sg-party', title: 'Tiệc cưới Duy Lâm & Yến Nhi — TP. Hồ Chí Minh', city: 'TP.HCM', countdown: true,
+      start: '2026-11-28T18:00:00+07:00', end: '2026-11-28T21:30:00+07:00',
+      place: 'Trung tâm Hội nghị Tiệc cưới Asiana Plaza',
+      address: '284 – 286 Vườn Lài, Phường Phú Thọ Hòa, Quận Tân Phú, Thành phố Hồ Chí Minh',
+      map: 'Trung tâm Hội nghị Tiệc cưới Asiana Plaza, 284 Vườn Lài, Phú Thọ Hòa, Tân Phú, Thành phố Hồ Chí Minh' },
 
-  /* Địa chỉ hiển thị trên bản đồ. Đổi thành địa chỉ nhà hàng thật. */
-  mapQuery: '789 Đường DEF, Quận 5, Thành phố Hồ Chí Minh',
-
-  /* Ảnh album. Thay bằng ảnh cưới thật, ví dụ 'images/album/01.jpg'. */
-  album: [
-    'images/bg-floral-blur-blush.jpg',
-    'images/bg-floral-blur-rose.jpg',
-    'images/bg-cream-gold-frame.jpg',
-    'images/bg-floral-blur-cream.jpg',
-    'images/bg-sky-clouds-pastel.jpg',
-    'images/bg-marble-white.jpg'
+    { id: 'hn-party', title: 'Tiệc cưới Duy Lâm & Yến Nhi — Hà Nội', city: 'Hà Nội', countdown: true,
+      start: '2026-12-10T12:00:00+07:00',
+      place: 'Nhà văn hoá thôn Mai Hiên',
+      address: 'Thôn Mai Hiên, xã Mai Lâm, huyện Đông Anh, Hà Nội',
+      map: 'Nhà văn hoá thôn Mai Hiên, Mai Lâm, Đông Anh, Hà Nội' }
   ],
 
-  /* Tài khoản nhận mừng cưới.
+  /* Ảnh album. Bỏ ảnh cưới vào images/album/ rồi liệt kê ở đây,
+     ví dụ 'images/album/01.jpg'. Để mảng rỗng thì mục Album tự ẩn đi. */
+  album: [],
+
+  /* Tài khoản mừng cưới. Chưa điền số tài khoản (number: '') thì
+     cả mục "Hộp quà mừng" tự ẩn, khách sẽ không thấy số giả.
      qr: đường dẫn ảnh QR (để trống '' nếu chưa có). */
   banks: [
-    { side: 'Nhà trai', bank: 'Vietcombank', owner: 'NGUYEN HOANG LAM', number: '0123456789', qr: '' },
-    { side: 'Nhà gái',  bank: 'Techcombank', owner: 'LE YEN NHI',       number: '9876543210', qr: '' }
+    { side: 'Chú rể', bank: '', owner: 'PHAM DUY LAM',     number: '', qr: '' },
+    { side: 'Cô dâu', bank: '', owner: 'LE HUYNH YEN NHI', number: '', qr: '' }
   ],
 
   /* Nhạc nền. Để trống '' nếu không dùng. */
   music: '',
 
-  /* Nơi nhận dữ liệu biểu mẫu (RSVP và lời chúc).
+  /* Nơi nhận dữ liệu biểu mẫu xác nhận tham dự (RSVP).
      Để null thì dữ liệu chỉ lưu trên trình duyệt của khách.
      Xem hướng dẫn nối Google Sheet trong README.md. */
   formEndpoint: null
@@ -55,6 +63,35 @@ const store = {
   }
 };
 
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const eventById = id => CONFIG.events.find(e => e.id === id);
+
+// Lấy ngày/tháng/năm theo giờ Việt Nam thẳng từ chuỗi, không phụ thuộc
+// múi giờ của máy khách.
+const ymd = iso => ({ y: +iso.slice(0, 4), m: +iso.slice(5, 7), d: +iso.slice(8, 10) });
+const pad2 = n => String(n).padStart(2, '0');
+
+
+/* ------------------------------------------------------------
+   Tim bay trên nền đỏ
+   ------------------------------------------------------------ */
+function initHearts() {
+  const box = $('#hearts');
+  if (!box || reduceMotion) return;
+  const tints = ['#e9ce9e', '#c9a24a', '#b8434e', '#f3e8de'];
+  for (let i = 0; i < 16; i++) {
+    const h = document.createElement('span');
+    h.className = 'heart';
+    h.style.setProperty('--x', `${Math.random() * 100}%`);
+    h.style.setProperty('--s', `${10 + Math.random() * 16}px`);
+    h.style.setProperty('--c', tints[i % tints.length]);
+    h.style.setProperty('--o', (0.25 + Math.random() * 0.4).toFixed(2));
+    h.style.setProperty('--d', `${11 + Math.random() * 10}s`);
+    h.style.setProperty('--delay', `${-Math.random() * 20}s`);
+    box.appendChild(h);
+  }
+}
+
 
 /* ------------------------------------------------------------
    Mở thiệp
@@ -69,56 +106,131 @@ function initCover() {
     card.hidden = false;
     cover.classList.add('is-open');
     document.body.classList.remove('is-locked');
+    window.scrollTo(0, 0);
     playMusic();
-    setTimeout(() => card.scrollIntoView({ behavior: 'smooth' }), 120);
   });
 }
 
 
 /* ------------------------------------------------------------
-   Đếm ngược
+   Nút "Chỉ đường" và "Thêm vào lịch" trên từng thẻ tiệc
    ------------------------------------------------------------ */
-function initCountdown() {
-  const root = $('#countdown');
-  if (!root) return;
+function calendarUrl(ev) {
+  const stamp = d => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const start = new Date(ev.start);
+  const end   = ev.end ? new Date(ev.end) : new Date(start.getTime() + 2 * 3600e3);
+  const q = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: ev.title,
+    dates: `${stamp(start)}/${stamp(end)}`,
+    location: `${ev.place}, ${ev.address}`,
+    details: 'Trân trọng kính mời quý khách đến chung vui cùng gia đình chúng tôi.'
+  });
+  return `https://calendar.google.com/calendar/render?${q}`;
+}
 
-  const target = new Date(CONFIG.weddingDate).getTime();
-  if (Number.isNaN(target)) return;
-
-  const pad = n => String(n).padStart(2, '0');
-  const cell = key => $(`[data-cd="${key}"]`, root);
-
-  let timer = null;
-
-  // Trả về true khi đã đến ngày cưới, để dừng bộ đếm.
-  const tick = () => {
-    const left = target - Date.now();
-    if (left <= 0) {
-      ['days', 'hours', 'mins', 'secs'].forEach(k => { cell(k).textContent = '00'; });
-      if (timer !== null) clearInterval(timer);
-      return true;
-    }
-    const s = Math.floor(left / 1000);
-    cell('days').textContent  = pad(Math.floor(s / 86400));
-    cell('hours').textContent = pad(Math.floor(s / 3600) % 24);
-    cell('mins').textContent  = pad(Math.floor(s / 60) % 60);
-    cell('secs').textContent  = pad(s % 60);
-    return false;
-  };
-
-  if (!tick()) timer = setInterval(tick, 1000);
+function initEventLinks() {
+  $$('[data-map]').forEach(a => {
+    const ev = eventById(a.dataset.map);
+    if (!ev) return;
+    const q = encodeURIComponent(ev.map || `${ev.place}, ${ev.address}`);
+    a.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
+  });
+  $$('[data-cal]').forEach(a => {
+    const ev = eventById(a.dataset.cal);
+    if (ev) a.href = calendarUrl(ev);
+  });
 }
 
 
 /* ------------------------------------------------------------
-   Bản đồ
+   Lịch tháng — mỗi tháng có sự kiện một tờ lịch, ngày cưới khoanh tim
    ------------------------------------------------------------ */
-function initMap() {
-  const frame = $('#map');
-  const link  = $('#mapLink');
-  const q = encodeURIComponent(CONFIG.mapQuery);
-  if (frame) frame.src = `https://maps.google.com/maps?q=${q}&hl=vi&z=16&output=embed`;
-  if (link)  link.href = `https://www.google.com/maps/search/?api=1&query=${q}`;
+function initCalendars() {
+  const wrap = $('#calendars');
+  if (!wrap) return;
+
+  // Gom ngày có sự kiện theo tháng: { "2026-11": { 28: "TP.HCM" } }
+  const months = {};
+  CONFIG.events.forEach(ev => {
+    const { y, m, d } = ymd(ev.start);
+    const key = `${y}-${pad2(m)}`;
+    (months[key] ||= {})[d] = ev.city;
+  });
+
+  wrap.innerHTML = Object.keys(months).sort().map(key => {
+    const [y, m] = key.split('-').map(Number);
+    const marks = months[key];
+    const first = (new Date(Date.UTC(y, m - 1, 1)).getUTCDay() + 6) % 7;   // thứ Hai = 0
+    const days  = new Date(Date.UTC(y, m, 0)).getUTCDate();
+
+    let cells = '<span></span>'.repeat(first);
+    for (let d = 1; d <= days; d++) {
+      cells += marks[d]
+        ? `<span class="cal__day is-marked" title="${marks[d]}"><b>${d}</b></span>`
+        : `<span class="cal__day">${d}</span>`;
+    }
+    const labels = Object.entries(marks)
+      .map(([d, city]) => `<p class="cal__note"><b>${pad2(d)} . ${pad2(m)}</b> ${city}</p>`).join('');
+
+    return `
+      <div class="cal">
+        <p class="cal__head">Tháng ${m}<small>${y}</small></p>
+        <div class="cal__grid">
+          ${['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map(w => `<span class="cal__wd">${w}</span>`).join('')}
+          ${cells}
+        </div>
+        ${labels}
+      </div>`;
+  }).join('');
+}
+
+
+/* ------------------------------------------------------------
+   Đếm ngược — tới buổi tiệc gần nhất chưa diễn ra
+   ------------------------------------------------------------ */
+function initCountdown() {
+  const root  = $('#countdown');
+  const label = $('#countdownLabel');
+  if (!root) return;
+
+  const targets = CONFIG.events
+    .filter(ev => ev.countdown)
+    .map(ev => ({ ev, t: new Date(ev.start).getTime() }))
+    .filter(x => !Number.isNaN(x.t))
+    .sort((a, b) => a.t - b.t);
+  if (!targets.length) return;
+
+  const cell = key => $(`[data-cd="${key}"]`, root);
+  let timer = null;
+  let current = null;
+
+  const tick = () => {
+    const now  = Date.now();
+    const next = targets.find(x => x.t > now);
+
+    if (!next) {
+      ['days', 'hours', 'mins', 'secs'].forEach(k => { cell(k).textContent = '00'; });
+      if (label) label.textContent = 'Cảm ơn quý khách đã đến chung vui!';
+      if (timer !== null) clearInterval(timer);
+      return true;
+    }
+
+    if (next !== current && label) {
+      const { d, m } = ymd(next.ev.start);
+      label.innerHTML = `Còn lại đến tiệc cưới <b>${next.ev.city}</b> · ${pad2(d)} . ${pad2(m)}`;
+      current = next;
+    }
+
+    const s = Math.floor((next.t - now) / 1000);
+    cell('days').textContent  = pad2(Math.floor(s / 86400));
+    cell('hours').textContent = pad2(Math.floor(s / 3600) % 24);
+    cell('mins').textContent  = pad2(Math.floor(s / 60) % 60);
+    cell('secs').textContent  = pad2(s % 60);
+    return false;
+  };
+
+  if (!tick()) timer = setInterval(tick, 1000);
 }
 
 
@@ -130,6 +242,11 @@ function initAlbum() {
   const box  = $('#lightbox');
   const img  = $('#lightboxImg');
   if (!grid) return;
+
+  // Chưa có ảnh thì ẩn hẳn mục Album thay vì để một ô trống
+  const section = $('#albumSection');
+  if (!CONFIG.album.length) { if (section) section.hidden = true; return; }
+  if (section) section.hidden = false;
 
   CONFIG.album.forEach((src, i) => {
     const el = document.createElement('img');
@@ -152,13 +269,20 @@ function initAlbum() {
 
 
 /* ------------------------------------------------------------
-   Mừng cưới
+   Hộp quà mừng — bấm hộp quà để hiện số tài khoản
    ------------------------------------------------------------ */
 function initGifts() {
-  const wrap = $('#gifts');
-  if (!wrap) return;
+  const section = $('#giftSection');
+  const wrap    = $('#gifts');
+  const toggle  = $('#giftToggle');
+  if (!section || !wrap) return;
 
-  CONFIG.banks.forEach(b => {
+  const banks = CONFIG.banks.filter(b => b.number);
+  section.hidden = !banks.length;
+  if (!banks.length) return;
+
+  wrap.innerHTML = '';
+  banks.forEach(b => {
     const card = document.createElement('div');
     card.className = 'gift';
     card.innerHTML = `
@@ -186,6 +310,13 @@ function initGifts() {
     });
 
     wrap.appendChild(card);
+  });
+
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.classList.toggle('is-open', open);
+    wrap.hidden = !open;
   });
 }
 
@@ -242,68 +373,6 @@ function initRsvp() {
   });
 }
 
-function renderWishes() {
-  const list = $('#wishList');
-  if (!list) return;
-  const wishes = store.get('wishes', []);
-  list.innerHTML = wishes.length
-    ? wishes.map(w => `
-        <div class="wish">
-          <p class="wish__name">${escapeHtml(w.name)}</p>
-          <p class="wish__text">${escapeHtml(w.message)}</p>
-        </div>`).join('')
-    : '<p class="wishes__empty">Chưa có lời chúc nào. Hãy là người đầu tiên nhé!</p>';
-}
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-
-function initWishes() {
-  const form = $('#wishForm');
-  const note = $('#wishNote');
-  if (!form) return;
-
-  renderWishes();
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const name    = $('#wishName').value.trim();
-    const message = $('#wishText').value.trim();
-    if (!name || !message) { note.textContent = 'Vui lòng nhập tên và lời chúc.'; return; }
-
-    const btn = $('.btn-submit', form);
-    btn.disabled = true;
-    note.textContent = 'Đang gửi…';
-
-    await sendForm('wish', { name, message });
-    const wishes = store.get('wishes', []);
-    wishes.unshift({ name, message });
-    store.set('wishes', wishes);
-
-    renderWishes();
-    note.textContent = 'Cảm ơn lời chúc của bạn!';
-    form.reset();
-    btn.disabled = false;
-  });
-}
-
-
-/* ------------------------------------------------------------
-   Đổi tông màu kem / đỏ
-   ------------------------------------------------------------ */
-function initTheme() {
-  const saved = store.get('theme', null);
-  if (saved) document.documentElement.dataset.theme = saved;
-
-  $('#themeBtn')?.addEventListener('click', () => {
-    const next = document.documentElement.dataset.theme === 'red' ? 'cream' : 'red';
-    document.documentElement.dataset.theme = next;
-    store.set('theme', next);
-  });
-}
-
 
 /* ------------------------------------------------------------
    Nhạc nền
@@ -352,14 +421,14 @@ function initReveal() {
    Khởi động
    ------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', () => {
-  initTheme();
+  initHearts();
   initCover();
+  initEventLinks();
+  initCalendars();
   initCountdown();
-  initMap();
   initAlbum();
   initGifts();
   initRsvp();
-  initWishes();
   initMusic();
   initReveal();
 });
