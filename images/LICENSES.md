@@ -31,7 +31,8 @@ Hình minh hoạ cô dâu và chú rể trong hai chiếc điện thoại, nền
 
 ## `PNG 1.png` – `PNG 4.png`
 
-Bốn hình nét đen trên nền trong suốt, làm biểu tượng cho mục "Lịch trình tiệc cưới".
+Bốn hình nét đen trên nền trong suốt. **Hiện chưa dùng trong thiệp** — mục "Lịch
+trình tiệc cưới" đã bỏ ngày 14/09/2026, bốn file vẫn giữ lại để dùng sau.
 
 | File | Hình | Mốc giờ | Kích thước |
 |---|---|---|---|

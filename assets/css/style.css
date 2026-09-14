@@ -705,73 +705,7 @@ body.is-locked .paper { opacity: 0; }
 .cd__num { font-family: var(--font-names); font-size: clamp(1.4rem, 6.5vw, 1.8rem); line-height: 1; }
 .cd__lab { font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-pale); margin-top: .35rem; }
 
-/* ---------- 5. Lịch trình ---------- */
-.timeline {
-  position: relative;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-}
-
-/* Trục dọc chạy giữa cột giờ và cột nội dung: 52 + 20 + 50 + 10 = 132px */
-.timeline::before {
-  content: "";
-  position: absolute;
-  top: 1.2rem;
-  bottom: 1.2rem;
-  left: 132px;
-  width: 1px;
-  background: var(--burgundy-soft);
-  opacity: .45;
-}
-
-.tl {
-  position: relative;
-  display: grid;
-  grid-template-columns: 52px 50px 1fr;
-  column-gap: 20px;
-  align-items: center;
-  padding: .75rem 0;
-}
-
-.tl::before {
-  content: "";
-  position: absolute;
-  left: 127.5px;
-  top: 50%;
-  width: 9px;
-  height: 9px;
-  margin-top: -4.5px;
-  border-radius: 50%;
-  background: var(--burgundy-soft);
-  box-shadow: 0 0 0 3px var(--cream);
-}
-
-/* Hình nét đen trên nền trong suốt; multiply để phần trắng hoà vào giấy */
-.tl__icon { width: 52px; height: 44px; object-fit: contain; mix-blend-mode: multiply; opacity: .85; }
-
-.tl__time {
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: .98rem;
-  line-height: 1.25;
-  text-align: right;
-}
-
-.tl__tag {
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: .8rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--burgundy-soft);
-}
-
-.tl__vi { font-size: .9rem; line-height: 1.45; }
-.tl__en { font-size: .76rem; line-height: 1.4; font-style: italic; color: var(--ink-soft); }
-
-/* ---------- 6. Album ---------- */
+/* ---------- 5. Album ---------- */
 .album { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; }
 
 .album img {
@@ -810,7 +744,7 @@ body.is-locked .paper { opacity: 0; }
   cursor: pointer;
 }
 
-/* ---------- 7. Xác nhận tham dự ---------- */
+/* ---------- 6. Xác nhận tham dự ---------- */
 .form { display: grid; gap: .9rem; text-align: left; }
 .field { display: grid; gap: .35rem; }
 
@@ -863,7 +797,7 @@ body.is-locked .paper { opacity: 0; }
 
 .form__note { font-size: .82rem; text-align: center; min-height: 1.4em; opacity: .9; }
 
-/* ---------- 8. Hộp quà mừng ---------- */
+/* ---------- 7. Hộp quà mừng ---------- */
 .giftbox {
   display: grid;
   justify-items: center;
@@ -976,7 +910,7 @@ body.is-locked .paper { opacity: 0; }
   cursor: pointer;
 }
 
-/* ---------- 9. Cảm ơn ---------- */
+/* ---------- 8. Cảm ơn ---------- */
 .thanks__quote {
   font-family: var(--font-head);
   font-weight: 600;

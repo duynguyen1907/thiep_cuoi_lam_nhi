@@ -10,15 +10,17 @@ const CONFIG = {
      - map:       địa chỉ tra trên Google Maps cho nút "Chỉ đường"
      - end:       giờ kết thúc, chỉ dùng cho nút "Thêm vào lịch" (bỏ trống = +2 giờ)
      - countdown: true thì đồng hồ đếm ngược tới sự kiện này
-     - city:      tên hiện dưới ngày được khoanh tim trên lịch */
+     - city:      tên hiện dưới ngày được khoanh tim trên lịch
+     - name:      tên sự kiện, hiện ở đồng hồ đếm ngược
+     - title:     tên khi khách bấm "Thêm vào lịch" */
   events: [
-    { id: 'sg-party', title: 'Tiệc cưới Duy Lâm & Yến Nhi — TP. Hồ Chí Minh', city: 'TP.HCM', countdown: true,
+    { id: 'sg-party', name: 'Lễ Vu Quy', title: 'Lễ Vu Quy — Duy Lâm & Yến Nhi', city: 'TP.HCM', countdown: true,
       start: '2026-11-28T18:00:00+07:00', end: '2026-11-28T21:30:00+07:00',
       place: 'Trung tâm Hội nghị Tiệc cưới Asiana Plaza',
       address: '284 – 286 Vườn Lài, Phường Phú Thọ Hòa, Quận Tân Phú, Thành phố Hồ Chí Minh',
       map: 'Trung tâm Hội nghị Tiệc cưới Asiana Plaza, 284 Vườn Lài, Phú Thọ Hòa, Tân Phú, Thành phố Hồ Chí Minh' },
 
-    { id: 'hn-party', title: 'Tiệc cưới Duy Lâm & Yến Nhi — Hà Nội', city: 'Hà Nội', countdown: true,
+    { id: 'hn-party', name: 'Lễ Thành Hôn', title: 'Lễ Thành Hôn — Duy Lâm & Yến Nhi', city: 'Hà Nội', countdown: true,
       start: '2026-12-10T12:00:00+07:00',
       place: 'Nhà văn hoá thôn Mai Hiên',
       address: 'Thôn Mai Hiên, xã Mai Lâm, huyện Đông Anh, Hà Nội',
@@ -218,7 +220,7 @@ function initCountdown() {
 
     if (next !== current && label) {
       const { d, m } = ymd(next.ev.start);
-      label.innerHTML = `Còn lại đến tiệc cưới <b>${next.ev.city}</b> · ${pad2(d)} . ${pad2(m)}`;
+      label.innerHTML = `Còn lại đến <b>${next.ev.name}</b> · ${next.ev.city} · ${pad2(d)} . ${pad2(m)}`;
       current = next;
     }
 

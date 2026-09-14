@@ -14,7 +14,7 @@ không phụ thuộc thư viện ngoài. Mở `index.html` là chạy được.
 | | TP. Hồ Chí Minh — nhà gái | Hà Nội — nhà trai |
 |---|---|---|
 | Ngày | Thứ Bảy 28 / 11 / 2026 (20 / 10 Bính Ngọ) | Thứ Năm 10 / 12 / 2026 (02 / 11 Bính Ngọ) |
-| Tiệc | Asiana Plaza — đón khách 18:00, khai tiệc 19:00 | Nhà văn hoá thôn Mai Hiên — 12:00 |
+| Sự kiện | **Lễ Vu Quy** — Asiana Plaza, đón khách 18:00, khai tiệc 19:00 | **Lễ Thành Hôn** — Nhà văn hoá thôn Mai Hiên, 12:00 |
 
 ---
 
@@ -36,13 +36,12 @@ python -m http.server 8000
 | — | Bìa | Tên, hai ngày cưới, nút "Mở thiệp" |
 | 1 | Save the date | Hình minh hoạ, tên, hai ngày ở hai thành phố |
 | 2 | Thông tin lễ cưới | Hai họ, quê quán, cô dâu chú rể |
-| 3 | Thư mời tiệc cưới | Hai thẻ tiệc, mỗi thẻ có nút **Chỉ đường** và **Thêm vào lịch** |
-| 4 | Lịch cưới | Lịch tháng 11 và 12 khoanh tim ngày cưới + đếm ngược tới buổi tiệc gần nhất |
-| 5 | Lịch trình tiệc | Năm mốc giờ của tiệc TP.HCM, theo trang 4 của PDF TP.HCM |
-| 6 | Album | **Tự ẩn** khi chưa có ảnh |
-| 7 | Xác nhận tham dự | Khách chọn dự tiệc TP.HCM, Hà Nội hay cả hai |
-| 8 | Hộp quà mừng | **Tự ẩn** khi chưa điền số tài khoản |
-| 9 | Cảm ơn | Lời kết |
+| 3 | Lời mời | Thẻ **Lễ Vu Quy** (TP.HCM) và **Lễ Thành Hôn** (Hà Nội), mỗi thẻ có nút **Chỉ đường** và **Thêm vào lịch** |
+| 4 | Lịch cưới | Lịch tháng 11 và 12 khoanh tim ngày cưới + đếm ngược tới sự kiện gần nhất |
+| 5 | Album | **Tự ẩn** khi chưa có ảnh |
+| 6 | Xác nhận tham dự | Khách chọn dự TP.HCM, Hà Nội hay cả hai |
+| 7 | Hộp quà mừng | **Tự ẩn** khi chưa điền số tài khoản |
+| 8 | Cảm ơn | Lời kết |
 
 ---
 
@@ -107,6 +106,8 @@ Mỗi sự kiện trong `events` điều khiển:
 - **Nút trên thẻ tiệc** — `data-map="sg-party"` / `data-cal="sg-party"` trong
   `index.html` trỏ tới sự kiện có `id` tương ứng. `map` là chuỗi tra Google Maps;
   `end` chỉ dùng cho "Thêm vào lịch" (bỏ trống thì mặc định kéo dài 2 giờ).
+- **Tên sự kiện** — `name` hiện ở đồng hồ đếm ngược ("Lễ Vu Quy"), còn `title` là tên
+  khách thấy khi bấm "Thêm vào lịch".
 
 ---
 
@@ -181,7 +182,7 @@ assets/css/style.css    Bảng màu, bố cục, hiệu ứng
 assets/js/main.js       CONFIG + các chức năng
 images/main_bg.jpg      Tờ giấy nền có khung vàng
 images/Artboard 2.png   Hình minh hoạ cặp đôi
-images/PNG 1–4.png      Biểu tượng cho mục Lịch trình
+images/PNG 1–4.png      Biểu tượng, hiện chưa dùng
 images/album/           Ảnh cưới của bạn — tự tạo thư mục này
 images/LICENSES.md      Nguồn gốc và giấy phép của ảnh
 ```
