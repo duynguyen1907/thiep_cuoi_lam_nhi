@@ -10,6 +10,8 @@ không phụ thuộc thư viện ngoài. Mở `index.html` là chạy được.
 - **Hai ngày cưới ở hai nơi** — cách trình bày theo mẫu *Thiệp cưới 47* của
   cinelove.me: mỗi buổi tiệc một thẻ riêng có nút chỉ đường, và lịch tháng
   khoanh tim cả hai ngày.
+- **Hai thứ tiếng** — bìa có hai nút: **Mở thiệp** mở bản tiếng Việt, **Open** mở
+  bản tiếng Anh. Xem mục [Hai thứ tiếng](#hai-thứ-tiếng).
 
 | | TP. Hồ Chí Minh — nhà gái | Hà Nội — nhà trai |
 |---|---|---|
@@ -108,6 +110,37 @@ Mỗi sự kiện trong `events` điều khiển:
   `end` chỉ dùng cho "Thêm vào lịch" (bỏ trống thì mặc định kéo dài 2 giờ).
 - **Tên sự kiện** — `name` hiện ở đồng hồ đếm ngược ("Lễ Vu Quy"), còn `title` là tên
   khách thấy khi bấm "Thêm vào lịch".
+
+---
+
+## Hai thứ tiếng
+
+Bìa thiệp có hai nút: **Mở thiệp** mở bản tiếng Việt, **Open** mở bản tiếng Anh.
+Khách chọn một lần lúc mở thiệp; muốn đổi thì tải lại trang.
+
+Chữ tiếng Việt nằm giữa các thẻ trong `index.html`, bản tiếng Anh nằm ngay cạnh
+trong thuộc tính:
+
+```html
+<h3 class="party__name" data-en="Vu Quy Ceremony">Lễ Vu Quy</h3>
+<p class="party__addr" data-en="Dong Anh Commune, Hanoi<br>(Mai Hien Village...)">Xã Đông Anh, TP. Hà Nội<br>(...)</p>
+<input id="rsvpName" placeholder="Nguyễn Văn A" data-en-placeholder="Your name">
+<button id="musicBtn" title="Bật / tắt nhạc" data-en-title="Music on / off">♪</button>
+```
+
+- `data-en` — chữ tiếng Anh, được phép có thẻ HTML đơn giản (`<br>`, `<small>`).
+- `data-en-placeholder` — chữ mờ trong ô nhập.
+- `data-en-title` — chữ hiện khi rê chuột (dùng luôn cho `aria-label`).
+- Thẻ nào **không có** `data-en` thì giữ nguyên tiếng Việt ở cả hai bản — thêm
+  một dòng chữ mới mà quên `data-en` cũng không làm hỏng gì.
+
+Chữ do mã sinh ra nằm trong bảng `T` ở đầu `assets/js/main.js` (tên tháng, thứ
+trong tuần, lời nhắn của biểu mẫu, nút sao chép số tài khoản…). Tên sự kiện tiếng
+Anh nằm ở `CONFIG.events[].en`, tên bên nhà trai / nhà gái ở `CONFIG.banks[].sideEn`.
+
+**Lưu ý:** phần `value` của các ô chọn trong biểu mẫu luôn giữ tiếng Việt
+(`<option value="Nhà trai" data-en="Groom's family">`), nên dù khách xem bản tiếng
+Anh thì dữ liệu gửi về Google Sheet vẫn y như cũ.
 
 ---
 

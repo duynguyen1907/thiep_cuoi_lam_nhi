@@ -1,6 +1,12 @@
 /* ============================================================
    Thiệp cưới online — phần điều khiển
    Sửa thông tin đám cưới ở đối tượng CONFIG bên dưới.
+
+   Thiệp có hai thứ tiếng. Chữ tiếng Việt nằm trong index.html, bản tiếng
+   Anh nằm ngay cạnh trong thuộc tính data-en (và data-en-placeholder,
+   data-en-title) — xem hàm setLang. Chữ do mã sinh ra (lịch, đếm ngược,
+   hộp quà, lời nhắn của biểu mẫu) lấy trong bảng T; tên sự kiện tiếng
+   Anh nằm ở CONFIG.events[].en.
    ============================================================ */
 
 const CONFIG = {
@@ -12,15 +18,18 @@ const CONFIG = {
      - countdown: true thì đồng hồ đếm ngược tới sự kiện này
      - city:      tên hiện dưới ngày được khoanh tim trên lịch
      - name:      tên sự kiện, hiện ở đồng hồ đếm ngược
-     - title:     tên khi khách bấm "Thêm vào lịch" */
+     - title:     tên khi khách bấm "Thêm vào lịch"
+     - en:        bản tiếng Anh của name / title / city */
   events: [
     { id: 'sg-party', name: 'Lễ Vu Quy', title: 'Lễ Vu Quy — Duy Lâm & Yến Nhi', city: 'TP.HCM', countdown: true,
+      en: { name: 'Vu Quy Ceremony', title: 'Vu Quy Ceremony — Duy Lam & Yen Nhi', city: 'HCMC' },
       start: '2026-11-28T18:00:00+07:00', end: '2026-11-28T21:30:00+07:00',
       place: 'Trung tâm Hội nghị Tiệc cưới Asiana Plaza',
       address: '284 – 286 Vườn Lài, Phường Phú Thọ Hòa, Quận Tân Phú, Thành phố Hồ Chí Minh',
       map: 'Trung tâm Hội nghị Tiệc cưới Asiana Plaza, 284 Vườn Lài, Phú Thọ Hòa, Tân Phú, Thành phố Hồ Chí Minh' },
 
     { id: 'hn-party', name: 'Lễ Thành Hôn', title: 'Lễ Thành Hôn — Duy Lâm & Yến Nhi', city: 'Hà Nội', countdown: true,
+      en: { name: 'Thanh Hon Ceremony', title: 'Thanh Hon Ceremony — Duy Lam & Yen Nhi', city: 'Hanoi' },
       start: '2026-12-10T12:00:00+07:00',
       place: 'Nhà văn hoá thôn Mai Hiên',
       address: 'Thôn Mai Hiên, xã Mai Lâm, huyện Đông Anh, Hà Nội',
@@ -33,10 +42,11 @@ const CONFIG = {
 
   /* Tài khoản mừng cưới. Chưa điền số tài khoản (number: '') thì
      cả mục "Hộp quà mừng" tự ẩn, khách sẽ không thấy số giả.
-     qr: đường dẫn ảnh QR (để trống '' nếu chưa có). */
+     qr: đường dẫn ảnh QR (để trống '' nếu chưa có).
+     sideEn: tên bên, hiện khi khách xem bản tiếng Anh. */
   banks: [
-    { side: 'Chú rể', bank: '', owner: 'PHAM DUY LAM',     number: '', qr: '' },
-    { side: 'Cô dâu', bank: '', owner: 'LE HUYNH YEN NHI', number: '', qr: '' }
+    { side: 'Chú rể', sideEn: 'Groom', bank: '', owner: 'PHAM DUY LAM',     number: '', qr: '' },
+    { side: 'Cô dâu', sideEn: 'Bride', bank: '', owner: 'LE HUYNH YEN NHI', number: '', qr: '' }
   ],
 
   /* Nhạc nền. Để trống '' nếu không dùng. */
@@ -46,6 +56,48 @@ const CONFIG = {
      Để null thì dữ liệu chỉ lưu trên trình duyệt của khách.
      Xem hướng dẫn nối Google Sheet trong README.md. */
   formEndpoint: null
+};
+
+
+/* ------------------------------------------------------------
+   Chữ do mã sinh ra, theo từng thứ tiếng
+   ------------------------------------------------------------ */
+const T = {
+  vi: {
+    title: 'Duy Lâm & Yến Nhi — Thiệp cưới',
+    weekdays: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
+    month: m => `Tháng ${m}`,
+    left: 'Còn lại đến',
+    ended: 'Cảm ơn quý khách đã đến chung vui!',
+    copy: 'Sao chép số tài khoản',
+    copied: 'Đã sao chép',
+    copyFail: 'Không sao chép được',
+    qrAlt: 'Mã QR',
+    albumAlt: 'Ảnh cưới',
+    sending: 'Đang gửi…',
+    needName: 'Vui lòng nhập họ và tên.',
+    rsvpOk: 'Cảm ơn bạn đã xác nhận!',
+    rsvpLocal: 'Đã ghi nhận xác nhận của bạn. Cảm ơn bạn rất nhiều!',
+    calDetails: 'Trân trọng kính mời quý khách đến chung vui cùng gia đình chúng tôi.'
+  },
+  en: {
+    title: 'Duy Lâm & Yến Nhi — Wedding Invitation',
+    weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    month: m => ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+                 'August', 'September', 'October', 'November', 'December'][m - 1],
+    left: 'Time left until',
+    ended: 'Thank you for celebrating with us!',
+    copy: 'Copy account number',
+    copied: 'Copied',
+    copyFail: 'Could not copy',
+    qrAlt: 'QR code',
+    albumAlt: 'Wedding photo',
+    sending: 'Sending…',
+    needName: 'Please enter your full name.',
+    rsvpOk: 'Thank you for confirming!',
+    rsvpLocal: 'Your RSVP has been saved. Thank you very much!',
+    calDetails: 'We would be honoured to have you celebrate with us.'
+  }
 };
 
 
@@ -75,6 +127,52 @@ const pad2 = n => String(n).padStart(2, '0');
 
 
 /* ------------------------------------------------------------
+   Thứ tiếng — 'vi' (mặc định) hoặc 'en'
+   ------------------------------------------------------------ */
+let LANG = 'vi';
+
+const t       = key => (LANG === 'en' ? T.en : T.vi)[key];
+const evName  = ev => (LANG === 'en' && ev.en && ev.en.name)  || ev.name;
+const evCity  = ev => (LANG === 'en' && ev.en && ev.en.city)  || ev.city;
+const evTitle = ev => (LANG === 'en' && ev.en && ev.en.title) || ev.title;
+
+// Giữ bản tiếng Việt gốc để đổi qua đổi lại được
+const viHtml = new Map();
+const viAttr = new Map();
+
+function setLang(lang) {
+  LANG = lang === 'en' ? 'en' : 'vi';
+  document.documentElement.lang = LANG;
+  document.documentElement.dataset.lang = LANG;
+
+  $$('[data-en]').forEach(el => {
+    if (!viHtml.has(el)) viHtml.set(el, el.innerHTML);
+    el.innerHTML = LANG === 'en' ? el.dataset.en : viHtml.get(el);
+  });
+
+  $$('[data-en-placeholder]').forEach(el => {
+    if (!viAttr.has(el)) viAttr.set(el, el.placeholder);
+    el.placeholder = LANG === 'en' ? el.dataset.enPlaceholder : viAttr.get(el);
+  });
+
+  $$('[data-en-title]').forEach(el => {
+    if (!viAttr.has(el)) viAttr.set(el, el.title);
+    el.title = LANG === 'en' ? el.dataset.enTitle : viAttr.get(el);
+    el.setAttribute('aria-label', el.title);
+  });
+
+  document.title = t('title');
+
+  // Vẽ lại những phần do mã sinh ra
+  initEventLinks();
+  initCalendars();
+  initCountdown();
+  renderAlbum();
+  renderGifts();
+}
+
+
+/* ------------------------------------------------------------
    Tim bay trên nền đỏ
    ------------------------------------------------------------ */
 function initHearts() {
@@ -96,26 +194,27 @@ function initHearts() {
 
 
 /* ------------------------------------------------------------
-   Mở thiệp
+   Mở thiệp — "Mở thiệp" mở bản tiếng Việt, "Open" mở bản tiếng Anh
    ------------------------------------------------------------ */
 function initCover() {
   const cover = $('#cover');
   const card  = $('#card');
-  const btn   = $('#openBtn');
-  if (!cover || !card || !btn) return;
+  const btns  = $$('[data-open-lang]');
+  if (!cover || !card || !btns.length) return;
 
-  btn.addEventListener('click', () => {
+  btns.forEach(btn => btn.addEventListener('click', () => {
+    setLang(btn.dataset.openLang);
     card.hidden = false;
     cover.classList.add('is-open');
     document.body.classList.remove('is-locked');
     window.scrollTo(0, 0);
     playMusic();
-  });
+  }));
 }
 
 
 /* ------------------------------------------------------------
-   Nút "Chỉ đường" và "Thêm vào lịch" trên từng thẻ tiệc
+   Nút "Chỉ đường" và "Thêm vào lịch" trên từng thẻ mời
    ------------------------------------------------------------ */
 function calendarUrl(ev) {
   const stamp = d => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
@@ -123,10 +222,10 @@ function calendarUrl(ev) {
   const end   = ev.end ? new Date(ev.end) : new Date(start.getTime() + 2 * 3600e3);
   const q = new URLSearchParams({
     action: 'TEMPLATE',
-    text: ev.title,
+    text: evTitle(ev),
     dates: `${stamp(start)}/${stamp(end)}`,
     location: `${ev.place}, ${ev.address}`,
-    details: 'Trân trọng kính mời quý khách đến chung vui cùng gia đình chúng tôi.'
+    details: t('calDetails')
   });
   return `https://calendar.google.com/calendar/render?${q}`;
 }
@@ -152,12 +251,12 @@ function initCalendars() {
   const wrap = $('#calendars');
   if (!wrap) return;
 
-  // Gom ngày có sự kiện theo tháng: { "2026-11": { 28: "TP.HCM" } }
+  // Gom sự kiện theo tháng: { "2026-11": { 28: <sự kiện> } }
   const months = {};
   CONFIG.events.forEach(ev => {
     const { y, m, d } = ymd(ev.start);
     const key = `${y}-${pad2(m)}`;
-    (months[key] ||= {})[d] = ev.city;
+    (months[key] ||= {})[d] = ev;
   });
 
   wrap.innerHTML = Object.keys(months).sort().map(key => {
@@ -169,17 +268,17 @@ function initCalendars() {
     let cells = '<span></span>'.repeat(first);
     for (let d = 1; d <= days; d++) {
       cells += marks[d]
-        ? `<span class="cal__day is-marked" title="${marks[d]}"><b>${d}</b></span>`
+        ? `<span class="cal__day is-marked" title="${evCity(marks[d])}"><b>${d}</b></span>`
         : `<span class="cal__day">${d}</span>`;
     }
     const labels = Object.entries(marks)
-      .map(([d, city]) => `<p class="cal__note"><b>${pad2(d)} . ${pad2(m)}</b> ${city}</p>`).join('');
+      .map(([d, ev]) => `<p class="cal__note"><b>${pad2(d)} . ${pad2(m)}</b> ${evCity(ev)}</p>`).join('');
 
     return `
       <div class="cal">
-        <p class="cal__head">Tháng ${m}<small>${y}</small></p>
+        <p class="cal__head">${t('month')(m)}<small>${y}</small></p>
         <div class="cal__grid">
-          ${['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map(w => `<span class="cal__wd">${w}</span>`).join('')}
+          ${t('weekdays').map(w => `<span class="cal__wd">${w}</span>`).join('')}
           ${cells}
         </div>
         ${labels}
@@ -189,12 +288,17 @@ function initCalendars() {
 
 
 /* ------------------------------------------------------------
-   Đếm ngược — tới buổi tiệc gần nhất chưa diễn ra
+   Đếm ngược — tới sự kiện gần nhất chưa diễn ra
    ------------------------------------------------------------ */
+let cdTimer = null;
+
 function initCountdown() {
   const root  = $('#countdown');
   const label = $('#countdownLabel');
   if (!root) return;
+
+  // Gọi lại khi đổi thứ tiếng, nên phải dừng đồng hồ cũ
+  if (cdTimer !== null) { clearInterval(cdTimer); cdTimer = null; }
 
   const targets = CONFIG.events
     .filter(ev => ev.countdown)
@@ -204,7 +308,6 @@ function initCountdown() {
   if (!targets.length) return;
 
   const cell = key => $(`[data-cd="${key}"]`, root);
-  let timer = null;
   let current = null;
 
   const tick = () => {
@@ -213,14 +316,14 @@ function initCountdown() {
 
     if (!next) {
       ['days', 'hours', 'mins', 'secs'].forEach(k => { cell(k).textContent = '00'; });
-      if (label) label.textContent = 'Cảm ơn quý khách đã đến chung vui!';
-      if (timer !== null) clearInterval(timer);
+      if (label) label.textContent = t('ended');
+      if (cdTimer !== null) { clearInterval(cdTimer); cdTimer = null; }
       return true;
     }
 
     if (next !== current && label) {
       const { d, m } = ymd(next.ev.start);
-      label.innerHTML = `Còn lại đến <b>${next.ev.name}</b> · ${next.ev.city} · ${pad2(d)} . ${pad2(m)}`;
+      label.innerHTML = `${t('left')} <b>${evName(next.ev)}</b> · ${evCity(next.ev)} · ${pad2(d)} . ${pad2(m)}`;
       current = next;
     }
 
@@ -232,28 +335,29 @@ function initCountdown() {
     return false;
   };
 
-  if (!tick()) timer = setInterval(tick, 1000);
+  if (!tick()) cdTimer = setInterval(tick, 1000);
 }
 
 
 /* ------------------------------------------------------------
    Album + xem ảnh phóng to
    ------------------------------------------------------------ */
-function initAlbum() {
-  const grid = $('#album');
-  const box  = $('#lightbox');
-  const img  = $('#lightboxImg');
+function renderAlbum() {
+  const grid    = $('#album');
+  const section = $('#albumSection');
+  const box     = $('#lightbox');
+  const img     = $('#lightboxImg');
   if (!grid) return;
 
   // Chưa có ảnh thì ẩn hẳn mục Album thay vì để một ô trống
-  const section = $('#albumSection');
   if (!CONFIG.album.length) { if (section) section.hidden = true; return; }
   if (section) section.hidden = false;
 
+  grid.innerHTML = '';
   CONFIG.album.forEach((src, i) => {
     const el = document.createElement('img');
     el.src = src;
-    el.alt = `Ảnh cưới ${i + 1}`;
+    el.alt = `${t('albumAlt')} ${i + 1}`;
     el.loading = 'lazy';
     el.addEventListener('click', () => {
       img.src = src;
@@ -262,8 +366,13 @@ function initAlbum() {
     });
     grid.appendChild(el);
   });
+}
 
-  const close = () => box.classList.remove('is-open');
+function initAlbum() {
+  const box = $('#lightbox');
+  renderAlbum();
+
+  const close = () => box?.classList.remove('is-open');
   $('#lightboxClose')?.addEventListener('click', close);
   box?.addEventListener('click', e => { if (e.target === box) close(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
@@ -273,10 +382,9 @@ function initAlbum() {
 /* ------------------------------------------------------------
    Hộp quà mừng — bấm hộp quà để hiện số tài khoản
    ------------------------------------------------------------ */
-function initGifts() {
+function renderGifts() {
   const section = $('#giftSection');
   const wrap    = $('#gifts');
-  const toggle  = $('#giftToggle');
   if (!section || !wrap) return;
 
   const banks = CONFIG.banks.filter(b => b.number);
@@ -288,37 +396,43 @@ function initGifts() {
     const card = document.createElement('div');
     card.className = 'gift';
     card.innerHTML = `
-      <h3>${b.side}</h3>
-      ${b.qr ? `<img class="gift__qr" src="${b.qr}" alt="Mã QR ${b.bank}">` : ''}
+      <h3>${LANG === 'en' && b.sideEn ? b.sideEn : b.side}</h3>
+      ${b.qr ? `<img class="gift__qr" src="${b.qr}" alt="${t('qrAlt')} ${b.bank}">` : ''}
       <p>${b.bank}</p>
       <p class="gift__acc">${b.number}</p>
       <p>${b.owner}</p>
-      <button class="btn-copy" type="button">Sao chép số tài khoản</button>`;
+      <button class="btn-copy" type="button">${t('copy')}</button>`;
 
     const btn = $('.btn-copy', card);
     btn.addEventListener('click', async () => {
-      const done = () => { btn.textContent = 'Đã sao chép'; setTimeout(() => { btn.textContent = 'Sao chép số tài khoản'; }, 2000); };
+      const done = () => { btn.textContent = t('copied'); setTimeout(() => { btn.textContent = t('copy'); }, 2000); };
       try {
         await navigator.clipboard.writeText(b.number);
         done();
       } catch {
-        const t = document.createElement('textarea');
-        t.value = b.number;
-        document.body.appendChild(t);
-        t.select();
-        try { document.execCommand('copy'); done(); } catch { btn.textContent = 'Không sao chép được'; }
-        t.remove();
+        const ta = document.createElement('textarea');
+        ta.value = b.number;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch { btn.textContent = t('copyFail'); }
+        ta.remove();
       }
     });
 
     wrap.appendChild(card);
   });
+}
+
+function initGifts() {
+  const wrap   = $('#gifts');
+  const toggle = $('#giftToggle');
+  renderGifts();
 
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') !== 'true';
     toggle.setAttribute('aria-expanded', String(open));
     toggle.classList.toggle('is-open', open);
-    wrap.hidden = !open;
+    if (wrap) wrap.hidden = !open;
   });
 }
 
@@ -349,7 +463,7 @@ function initRsvp() {
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const name = $('#rsvpName').value.trim();
-    if (!name) { note.textContent = 'Vui lòng nhập họ và tên.'; return; }
+    if (!name) { note.textContent = t('needName'); return; }
 
     const data = {
       name,
@@ -360,16 +474,14 @@ function initRsvp() {
 
     const btn = $('.btn-submit', form);
     btn.disabled = true;
-    note.textContent = 'Đang gửi…';
+    note.textContent = t('sending');
 
     const res = await sendForm('rsvp', data);
     const saved = store.get('rsvp', []);
     saved.push(data);
     store.set('rsvp', saved);
 
-    note.textContent = res.ok
-      ? 'Cảm ơn bạn đã xác nhận!'
-      : 'Đã ghi nhận xác nhận của bạn. Cảm ơn bạn rất nhiều!';
+    note.textContent = res.ok ? t('rsvpOk') : t('rsvpLocal');
     form.reset();
     btn.disabled = false;
   });

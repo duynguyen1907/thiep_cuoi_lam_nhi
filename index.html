@@ -38,11 +38,14 @@
     <h1 class="cover__names">Duy Lâm<span>&amp;</span>Yến Nhi</h1>
     <div class="ornament" aria-hidden="true"><span></span><i>❦</i><span></span></div>
     <p class="cover__dates">
-      <span>28 . 11 . 2026 <small>TP. Hồ Chí Minh</small></span>
-      <span>10 . 12 . 2026 <small>Hà Nội</small></span>
+      <span>28 . 11 . 2026 <small data-en="Ho Chi Minh City">TP. Hồ Chí Minh</small></span>
+      <span>10 . 12 . 2026 <small data-en="Hanoi">Hà Nội</small></span>
     </p>
-    <p class="cover__invite">Thân mời</p>
-    <button class="btn-open" id="openBtn" type="button">Mở thiệp</button>
+    <p class="cover__invite">Thân mời<span>You're invited</span></p>
+    <div class="cover__actions">
+      <button class="btn-open" id="openBtn" type="button" data-open-lang="vi">Mở thiệp</button>
+      <button class="btn-open btn-open--alt" type="button" data-open-lang="en">Open</button>
+    </div>
   </div>
 </section>
 
@@ -61,8 +64,8 @@
       <span>Yến Nhi</span>
     </h2>
     <div class="hero__days">
-      <p><b>28 . 11 . 2026</b><small>TP. Hồ Chí Minh</small></p>
-      <p><b>10 . 12 . 2026</b><small>Hà Nội</small></p>
+      <p><b>28 . 11 . 2026</b><small data-en="Ho Chi Minh City">TP. Hồ Chí Minh</small></p>
+      <p><b>10 . 12 . 2026</b><small data-en="Hanoi">Hà Nội</small></p>
     </div>
   </section>
 
@@ -71,36 +74,36 @@
        ============================================================ -->
   <section class="s reveal">
     <div class="panel">
-      <h2 class="panel__title">Thông tin lễ cưới</h2>
+      <h2 class="panel__title" data-en="Wedding information">Thông tin lễ cưới</h2>
       <div class="families">
         <div class="family">
-          <p class="family__side">Nhà trai</p>
-          <p class="family__label">Ông Bà</p>
+          <p class="family__side" data-en="Groom&apos;s family">Nhà trai</p>
+          <p class="family__label" data-en="Mr. &amp; Mrs.">Ông Bà</p>
           <p class="family__parent">Phạm Văn Duy</p>
           <p class="family__parent">Nguyễn Thị Thu Thủy</p>
-          <p class="family__addr">Mai Hiên, Mai Lâm, Đông Anh,<br>Thành phố Hà Nội</p>
+          <p class="family__addr" data-en="Mai Hien, Mai Lam, Dong Anh,<br>Hanoi">Mai Hiên, Mai Lâm, Đông Anh,<br>Thành phố Hà Nội</p>
         </div>
         <div class="family">
-          <p class="family__side">Nhà gái</p>
-          <p class="family__label">Ông Bà</p>
+          <p class="family__side" data-en="Bride&apos;s family">Nhà gái</p>
+          <p class="family__label" data-en="Mr. &amp; Mrs.">Ông Bà</p>
           <p class="family__parent">Lê Thanh Hải</p>
           <!-- Bản PDF TP.HCM ghi "Huỳnh Thị Xanh", bản Hà Nội ghi "Huỳnh Thị Thanh" — cần xác nhận -->
           <p class="family__parent">Huỳnh Thị Xanh</p>
-          <p class="family__addr">Tân Thuận Tây, Tân Thuận,<br>Thành phố Hồ Chí Minh</p>
+          <p class="family__addr" data-en="Tan Thuan Tay, Tan Thuan,<br>Ho Chi Minh City">Tân Thuận Tây, Tân Thuận,<br>Thành phố Hồ Chí Minh</p>
         </div>
       </div>
 
-      <p class="panel__announce">Trân trọng báo tin<br>lễ thành hôn<br>của con chúng tôi</p>
+      <p class="panel__announce" data-en="Joyfully announce<br>the wedding of<br>their children">Trân trọng báo tin<br>lễ thành hôn<br>của con chúng tôi</p>
 
       <div class="couple">
         <div class="couple__person">
           <p class="couple__name">Phạm Duy Lâm</p>
-          <p class="couple__role">Trưởng nam</p>
+          <p class="couple__role" data-en="Eldest son">Trưởng nam</p>
         </div>
         <p class="couple__amp" aria-hidden="true">&amp;</p>
         <div class="couple__person">
           <p class="couple__name">Lê Huỳnh Yến Nhi</p>
-          <p class="couple__role">Trưởng nữ</p>
+          <p class="couple__role" data-en="Eldest daughter">Trưởng nữ</p>
         </div>
       </div>
     </div>
@@ -110,41 +113,41 @@
        3. LỜI MỜI — Lễ Vu Quy và Lễ Thành Hôn, nút lấy dữ liệu từ CONFIG.events
        ============================================================ -->
   <section class="s reveal">
-    <p class="kicker">Trân trọng kính mời</p>
-    <h2 class="s__title">Anh/Chị/Em và người thân</h2>
-    <p class="lead">Vui lòng đến dự buổi tiệc chung vui cùng gia đình chúng tôi</p>
+    <p class="kicker" data-en="Cordially invite">Trân trọng kính mời</p>
+    <h2 class="s__title" data-en="You and your family">Anh/Chị/Em và người thân</h2>
+    <p class="lead" data-en="Please join us to celebrate this happy day with our families">Vui lòng đến dự buổi tiệc chung vui cùng gia đình chúng tôi</p>
 
     <article class="party">
-      <p class="party__city">TP. Hồ Chí Minh</p>
-      <h3 class="party__name">Lễ Vu Quy</h3>
-      <p class="party__when">Thứ Bảy — 18 : 00</p>
+      <p class="party__city" data-en="Ho Chi Minh City">TP. Hồ Chí Minh</p>
+      <h3 class="party__name" data-en="Vu Quy Ceremony">Lễ Vu Quy</h3>
+      <p class="party__when" data-en="Saturday — 18 : 00">Thứ Bảy — 18 : 00</p>
       <p class="party__date">28 . 11 . 2026</p>
-      <p class="lunar">(Nhằm ngày 20 tháng 10 năm Bính Ngọ)</p>
+      <p class="lunar" data-en="(20th day, 10th lunar month — Year of Binh Ngo)">(Nhằm ngày 20 tháng 10 năm Bính Ngọ)</p>
       <div class="party__times">
-        <p><small>Đón khách</small>18 : 00</p>
-        <p><small>Khai tiệc</small>19 : 00</p>
+        <p><small data-en="Welcome">Đón khách</small>18 : 00</p>
+        <p><small data-en="Dinner starts">Khai tiệc</small>19 : 00</p>
       </div>
-      <p class="party__at">Tại</p>
-      <p class="party__venue"><small>Trung tâm Hội nghị Tiệc cưới</small>Asiana Plaza</p>
-      <p class="party__addr">284 – 286 Vườn Lài, Phường Phú Thọ Hòa,<br>Quận Tân Phú, TP. Hồ Chí Minh</p>
+      <p class="party__at" data-en="At">Tại</p>
+      <p class="party__venue" data-en="<small>Wedding Convention Center</small>Asiana Plaza"><small>Trung tâm Hội nghị Tiệc cưới</small>Asiana Plaza</p>
+      <p class="party__addr" data-en="284 – 286 Vuon Lai, Phu Tho Hoa Ward,<br>Tan Phu District, Ho Chi Minh City">284 – 286 Vườn Lài, Phường Phú Thọ Hòa,<br>Quận Tân Phú, TP. Hồ Chí Minh</p>
       <div class="party__actions">
-        <a class="btn-pill" data-map="sg-party" href="#" target="_blank" rel="noopener">Chỉ đường</a>
-        <a class="btn-pill btn-pill--ghost" data-cal="sg-party" href="#" target="_blank" rel="noopener">Thêm vào lịch</a>
+        <a class="btn-pill" data-map="sg-party" href="#" target="_blank" rel="noopener" data-en="Directions">Chỉ đường</a>
+        <a class="btn-pill btn-pill--ghost" data-cal="sg-party" href="#" target="_blank" rel="noopener" data-en="Add to calendar">Thêm vào lịch</a>
       </div>
     </article>
 
     <article class="party">
-      <p class="party__city">Hà Nội</p>
-      <h3 class="party__name">Lễ Thành Hôn</h3>
-      <p class="party__when">Thứ Năm — 12 : 00</p>
+      <p class="party__city" data-en="Hanoi">Hà Nội</p>
+      <h3 class="party__name" data-en="Thanh Hon Ceremony">Lễ Thành Hôn</h3>
+      <p class="party__when" data-en="Thursday — 12 : 00">Thứ Năm — 12 : 00</p>
       <p class="party__date">10 . 12 . 2026</p>
-      <p class="lunar">(Nhằm ngày 02 tháng 11 năm Bính Ngọ)</p>
-      <p class="party__at">Tại</p>
-      <p class="party__venue"><small>Nhà văn hoá</small>Thôn Mai Hiên</p>
-      <p class="party__addr">Xã Đông Anh, TP. Hà Nội<br>(Thôn Mai Hiên, xã Mai Lâm, huyện Đông Anh, Hà Nội)</p>
+      <p class="lunar" data-en="(2nd day, 11th lunar month — Year of Binh Ngo)">(Nhằm ngày 02 tháng 11 năm Bính Ngọ)</p>
+      <p class="party__at" data-en="At">Tại</p>
+      <p class="party__venue" data-en="<small>Community Hall</small>Mai Hien Village"><small>Nhà văn hoá</small>Thôn Mai Hiên</p>
+      <p class="party__addr" data-en="Dong Anh Commune, Hanoi<br>(Mai Hien Village, Mai Lam, Dong Anh, Hanoi)">Xã Đông Anh, TP. Hà Nội<br>(Thôn Mai Hiên, xã Mai Lâm, huyện Đông Anh, Hà Nội)</p>
       <div class="party__actions">
-        <a class="btn-pill" data-map="hn-party" href="#" target="_blank" rel="noopener">Chỉ đường</a>
-        <a class="btn-pill btn-pill--ghost" data-cal="hn-party" href="#" target="_blank" rel="noopener">Thêm vào lịch</a>
+        <a class="btn-pill" data-map="hn-party" href="#" target="_blank" rel="noopener" data-en="Directions">Chỉ đường</a>
+        <a class="btn-pill btn-pill--ghost" data-cal="hn-party" href="#" target="_blank" rel="noopener" data-en="Add to calendar">Thêm vào lịch</a>
       </div>
     </article>
   </section>
@@ -154,15 +157,15 @@
        ============================================================ -->
   <section class="s reveal">
     <p class="kicker">Save the date</p>
-    <h2 class="s__title">Lịch cưới</h2>
+    <h2 class="s__title" data-en="Wedding calendar">Lịch cưới</h2>
     <div class="calendars" id="calendars"></div>
     <div class="countdown-wrap">
-      <p class="countdown__label" id="countdownLabel">Còn lại</p>
+      <p class="countdown__label" id="countdownLabel" data-en="Time left">Còn lại</p>
       <div class="countdown" id="countdown">
-        <div class="cd__box"><div class="cd__num" data-cd="days">--</div><div class="cd__lab">Ngày</div></div>
-        <div class="cd__box"><div class="cd__num" data-cd="hours">--</div><div class="cd__lab">Giờ</div></div>
-        <div class="cd__box"><div class="cd__num" data-cd="mins">--</div><div class="cd__lab">Phút</div></div>
-        <div class="cd__box"><div class="cd__num" data-cd="secs">--</div><div class="cd__lab">Giây</div></div>
+        <div class="cd__box"><div class="cd__num" data-cd="days">--</div><div class="cd__lab" data-en="Days">Ngày</div></div>
+        <div class="cd__box"><div class="cd__num" data-cd="hours">--</div><div class="cd__lab" data-en="Hours">Giờ</div></div>
+        <div class="cd__box"><div class="cd__num" data-cd="mins">--</div><div class="cd__lab" data-en="Minutes">Phút</div></div>
+        <div class="cd__box"><div class="cd__num" data-cd="secs">--</div><div class="cd__lab" data-en="Seconds">Giây</div></div>
       </div>
     </div>
   </section>
@@ -171,8 +174,8 @@
        5. ALBUM — hiện ra khi có ảnh trong CONFIG.album
        ============================================================ -->
   <section class="s reveal" id="albumSection" hidden>
-    <p class="kicker">Khoảnh khắc</p>
-    <h2 class="s__title">Album ảnh cưới</h2>
+    <p class="kicker" data-en="Moments">Khoảnh khắc</p>
+    <h2 class="s__title" data-en="Wedding album">Album ảnh cưới</h2>
     <div class="album" id="album"></div>
   </section>
 
@@ -181,34 +184,34 @@
        ============================================================ -->
   <section class="s reveal">
     <div class="panel">
-      <h2 class="panel__title">Xác nhận tham dự</h2>
-      <p class="panel__lead">Sự hiện diện của quý khách giúp gia đình tiện sắp xếp chỗ ngồi chu đáo hơn.</p>
+      <h2 class="panel__title" data-en="RSVP">Xác nhận tham dự</h2>
+      <p class="panel__lead" data-en="Letting us know helps our families arrange the seating.">Sự hiện diện của quý khách giúp gia đình tiện sắp xếp chỗ ngồi chu đáo hơn.</p>
       <form class="form" id="rsvpForm" novalidate>
         <div class="field">
-          <label for="rsvpName">Họ và tên</label>
-          <input type="text" id="rsvpName" name="name" required autocomplete="name" placeholder="Nguyễn Văn A">
+          <label for="rsvpName" data-en="Full name">Họ và tên</label>
+          <input type="text" id="rsvpName" name="name" required autocomplete="name" placeholder="Nguyễn Văn A" data-en-placeholder="Your name">
         </div>
         <div class="field">
-          <label for="rsvpSide">Bạn là khách mời của</label>
+          <label for="rsvpSide" data-en="You are a guest of">Bạn là khách mời của</label>
           <select id="rsvpSide" name="side">
-            <option value="Nhà trai">Nhà trai</option>
-            <option value="Nhà gái">Nhà gái</option>
+            <option value="Nhà trai" data-en="Groom&apos;s family">Nhà trai</option>
+            <option value="Nhà gái" data-en="Bride&apos;s family">Nhà gái</option>
           </select>
         </div>
         <div class="field">
-          <label for="rsvpAttend">Bạn sẽ dự tiệc tại</label>
+          <label for="rsvpAttend" data-en="You will attend">Bạn sẽ dự tiệc tại</label>
           <select id="rsvpAttend" name="attend">
-            <option value="TP.HCM 28/11">TP. Hồ Chí Minh · 28/11</option>
-            <option value="Hà Nội 10/12">Hà Nội · 10/12</option>
-            <option value="Cả hai">Cả hai buổi tiệc</option>
-            <option value="Không">Rất tiếc, tôi không đến được</option>
+            <option value="TP.HCM 28/11" data-en="Ho Chi Minh City · 28/11">TP. Hồ Chí Minh · 28/11</option>
+            <option value="Hà Nội 10/12" data-en="Hanoi · 10/12">Hà Nội · 10/12</option>
+            <option value="Cả hai" data-en="Both celebrations">Cả hai buổi tiệc</option>
+            <option value="Không" data-en="Sorry, I cannot make it">Rất tiếc, tôi không đến được</option>
           </select>
         </div>
         <div class="field">
-          <label for="rsvpCount">Số người tham dự</label>
+          <label for="rsvpCount" data-en="Number of guests">Số người tham dự</label>
           <input type="number" id="rsvpCount" name="guests" min="1" max="10" value="1">
         </div>
-        <button class="btn-submit" type="submit">Gửi xác nhận</button>
+        <button class="btn-submit" type="submit" data-en="Send RSVP">Gửi xác nhận</button>
         <p class="form__note" id="rsvpNote" role="status"></p>
       </form>
     </div>
@@ -218,12 +221,12 @@
        7. HỘP QUÀ MỪNG — tự ẩn khi chưa điền số tài khoản trong CONFIG.banks
        ============================================================ -->
   <section class="s reveal" id="giftSection" hidden>
-    <p class="kicker">Mừng cưới</p>
-    <h2 class="s__title">Hộp quà mừng</h2>
+    <p class="kicker" data-en="Wedding gift">Mừng cưới</p>
+    <h2 class="s__title" data-en="Gift box">Hộp quà mừng</h2>
     <button class="giftbox" id="giftToggle" type="button" aria-expanded="false" aria-controls="gifts">
       <span class="giftbox__lid" aria-hidden="true"></span>
       <span class="giftbox__body" aria-hidden="true"></span>
-      <span class="giftbox__hint">Nhấn để mở</span>
+      <span class="giftbox__hint" data-en="Tap to open">Nhấn để mở</span>
     </button>
     <div class="gifts" id="gifts" hidden></div>
   </section>
@@ -232,7 +235,7 @@
        8. CẢM ƠN
        ============================================================ -->
   <footer class="s thanks reveal">
-    <p class="thanks__quote">Sự hiện diện của quý khách<br>là món quà quý giá nhất<br>trong ngày vui của chúng tôi.</p>
+    <p class="thanks__quote" data-en="Your presence<br>is the greatest gift<br>on our wedding day.">Sự hiện diện của quý khách<br>là món quà quý giá nhất<br>trong ngày vui của chúng tôi.</p>
     <div class="ornament ornament--ink" aria-hidden="true"><span></span><i>❦</i><span></span></div>
     <p class="thanks__names">Duy Lâm <span>&amp;</span> Yến Nhi</p>
   </footer>
@@ -248,7 +251,7 @@
 
 <!-- Nút bật / tắt nhạc -->
 <div class="floating">
-  <button class="fbtn" id="musicBtn" type="button" title="Bật / tắt nhạc" aria-label="Bật tắt nhạc">♪</button>
+  <button class="fbtn" id="musicBtn" type="button" title="Bật / tắt nhạc" aria-label="Bật tắt nhạc" data-en-title="Music on / off">♪</button>
 </div>
 
 <audio id="bgm" loop preload="none"></audio>
