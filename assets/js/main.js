@@ -442,17 +442,35 @@ function initGifts() {
    ------------------------------------------------------------ */
 async function sendForm(type, data) {
   if (!CONFIG.formEndpoint) return { ok: false, offline: true };
+
+  const body = JSON.stringify({ type, ...data, at: new Date().toISOString() });
+  const headers = { 'Content-Type': 'text/plain;charset=utf-8' };
+
+  // 1) Cách thường: gửi và đọc được kết quả trả về, nên biết chắc là đã ghi.
+  //    Content-Type text/plain để trình duyệt gửi thẳng, không hỏi trước
+  //    (Apps Script không trả lời câu hỏi preflight).
   try {
-    // Content-Type: text/plain để trình duyệt gửi thẳng, không phải hỏi trước
-    // (Apps Script không trả lời câu hỏi preflight). Bản web app của Apps Script
-    // có gắn Access-Control-Allow-Origin: * nên đọc được kết quả — nhờ vậy biết
-    // được là gửi hỏng thật hay không, thay vì lúc nào cũng báo thành công.
-    const res = await fetch(CONFIG.formEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ type, ...data, at: new Date().toISOString() })
-    });
-    return { ok: res.ok };
+    const res = await fetch(CONFIG.formEndpoint, { method: 'POST', headers, body });
+    if (res.ok) return { ok: true };
+  } catch (err) {
+    console.warn('Gửi kiểu thường không được, thử cách khác:', err);
+  }
+
+  // 2) Trình duyệt bên trong Messenger / Zalo / Facebook thường chặn cách trên.
+  //    sendBeacon gửi được nhưng không đọc được kết quả. Nếu cách 1 đã ghi rồi
+  //    thì doPost trong Apps Script bỏ qua dòng trùng (xem README), nên không
+  //    sợ ghi hai lần.
+  try {
+    const blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+    if (navigator.sendBeacon && navigator.sendBeacon(CONFIG.formEndpoint, blob)) {
+      return { ok: true, blind: true };
+    }
+  } catch { /* thử nốt cách cuối */ }
+
+  // 3) Cách cuối cho trình duyệt cũ, cũng không đọc được kết quả
+  try {
+    await fetch(CONFIG.formEndpoint, { method: 'POST', mode: 'no-cors', headers, body, keepalive: true });
+    return { ok: true, blind: true };
   } catch (err) {
     console.warn('Không gửi được dữ liệu biểu mẫu:', err);
     return { ok: false };

@@ -197,6 +197,13 @@ Muốn nối sang sheet khác thì làm lại các bước sau:
      const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
      const data  = JSON.parse(e.postData.contents);
 
+     // Trang có thể gửi hai lần cho chắc (xem phần dưới) — bỏ qua nếu vừa
+     // nhận đúng nội dung đó trong vòng 2 phút
+     const cache = CacheService.getScriptCache();
+     const key = 'rsvp:' + [data.name, data.side, data.attend, data.guests].join('|');
+     if (cache.get(key)) return ContentService.createTextOutput('duplicate');
+     cache.put(key, '1', 120);
+
      // Sheet còn trống thì tạo dòng tiêu đề, in đậm và ghim lại
      if (sheet.getLastRow() === 0) {
        sheet.appendRow(['Thời gian', 'Họ và tên', 'Khách của', 'Dự tiệc', 'Số người']);
@@ -225,6 +232,17 @@ Google và dòng dữ liệu không bao giờ tới.
 
 Cột **Dự tiệc** cho biết khách dự tiệc nào: `TP.HCM 28/11`, `Hà Nội 10/12`, `Cả hai`
 hoặc `Không` — giữ nguyên tiếng Việt kể cả khi khách xem bản tiếng Anh.
+
+### Trình duyệt trong Messenger, Zalo, Facebook
+
+Khách hay bấm đường dẫn ngay trong Messenger hoặc Zalo, và trình duyệt bên trong
+các ứng dụng đó **chặn cách gửi thông thường** — máy tính thì không sao nhưng điện
+thoại thì không ghi được dòng nào. Vì vậy `sendForm` trong `main.js` gửi theo ba
+bước: cách thường (đọc được kết quả) → `navigator.sendBeacon` (gửi được nhưng
+không đọc được) → `fetch` kiểu `no-cors`. Bước nào xong trước thì dừng.
+
+Vì bước 1 có thể đã ghi rồi mà trang không đọc được kết quả, `doPost` ở trên dùng
+`CacheService` bỏ qua dòng trùng trong 2 phút — gửi lại cũng chỉ ra một dòng.
 
 **Sửa mã xong phải triển khai lại thì mới có tác dụng:** Triển khai → Quản lý bản
 triển khai → bấm bút chì → Phiên bản: *Phiên bản mới* → Triển khai. Địa chỉ `/exec`
