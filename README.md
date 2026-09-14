@@ -49,10 +49,10 @@ python -m http.server 8000
 
 ## Còn phải điền / xác nhận
 
-### Tên mẹ cô dâu — hai PDF ghi khác nhau
+### Tên mẹ cô dâu — đã xác nhận
 
-Bản TP.HCM ghi **Huỳnh Thị Xanh**, bản Hà Nội ghi **Huỳnh Thị Thanh**. Thiệp đang
-dùng "Xanh" — sửa trong `index.html`, mục số 2 (có ghi chú ngay cạnh dòng đó).
+Tên đúng là **Huỳnh Thị Xanh**, chủ dự án xác nhận ngày 14/09/2026. Bản PDF Hà Nội
+ghi "Huỳnh Thị Thanh" là **ghi nhầm** — đừng sửa thiệp theo bản đó.
 
 ### Số tài khoản mừng cưới — chưa có trong PDF
 
