@@ -55,7 +55,7 @@ const CONFIG = {
   /* Nơi nhận dữ liệu biểu mẫu xác nhận tham dự (RSVP).
      Để null thì dữ liệu chỉ lưu trên trình duyệt của khách.
      Xem hướng dẫn nối Google Sheet trong README.md. */
-  formEndpoint: null
+  formEndpoint: 'https://script.google.com/macros/s/AKfycbxZojclFNNfE6eqSUFf1hDVFlZOxMsojwYRP0M2ZT6oI-wZ6qA_nNBK3qAaAYkoBtP2/exec'
 };
 
 
@@ -443,14 +443,18 @@ function initGifts() {
 async function sendForm(type, data) {
   if (!CONFIG.formEndpoint) return { ok: false, offline: true };
   try {
-    await fetch(CONFIG.formEndpoint, {
+    // Content-Type: text/plain để trình duyệt gửi thẳng, không phải hỏi trước
+    // (Apps Script không trả lời câu hỏi preflight). Bản web app của Apps Script
+    // có gắn Access-Control-Allow-Origin: * nên đọc được kết quả — nhờ vậy biết
+    // được là gửi hỏng thật hay không, thay vì lúc nào cũng báo thành công.
+    const res = await fetch(CONFIG.formEndpoint, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({ type, ...data, at: new Date().toISOString() })
     });
-    return { ok: true };
-  } catch {
+    return { ok: res.ok };
+  } catch (err) {
+    console.warn('Không gửi được dữ liệu biểu mẫu:', err);
     return { ok: false };
   }
 }

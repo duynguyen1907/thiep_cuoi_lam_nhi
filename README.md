@@ -183,8 +183,11 @@ cần sửa khối `@font-face` đó.
 
 ## Nhận phản hồi xác nhận tham dự
 
-Mặc định `formEndpoint: null` — dữ liệu chỉ lưu trong trình duyệt của khách,
-**bạn sẽ không nhận được**. Để thu thập thật, cách đơn giản nhất là Google Sheet:
+`CONFIG.formEndpoint` trong `assets/js/main.js` đang trỏ tới một Google Sheet qua
+Apps Script, xác nhận tham dự sẽ rơi thẳng vào sheet đó. Để trống (`null`) thì dữ
+liệu chỉ nằm trong trình duyệt của khách và **bạn sẽ không nhận được**.
+
+Muốn nối sang sheet khác thì làm lại các bước sau:
 
 1. Tạo một Google Sheet mới, vào **Tiện ích mở rộng → Apps Script**.
 2. Dán đoạn mã sau và lưu:
@@ -193,17 +196,39 @@ Mặc định `formEndpoint: null` — dữ liệu chỉ lưu trong trình duy�
    function doPost(e) {
      const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
      const data  = JSON.parse(e.postData.contents);
-     sheet.appendRow([data.at, data.type, data.name, data.side || '',
-                      data.attend || '', data.guests || '']);
+
+     // Sheet còn trống thì tạo dòng tiêu đề, in đậm và ghim lại
+     if (sheet.getLastRow() === 0) {
+       sheet.appendRow(['Thời gian', 'Họ và tên', 'Khách của', 'Dự tiệc', 'Số người']);
+       sheet.getRange(1, 1, 1, 5).setFontWeight('bold');
+       sheet.setFrozenRows(1);
+     }
+
+     sheet.appendRow([
+       Utilities.formatDate(new Date(), 'Asia/Ho_Chi_Minh', 'dd/MM/yyyy HH:mm'),
+       data.name, data.side || '', data.attend || '', data.guests || ''
+     ]);
      return ContentService.createTextOutput('ok');
    }
    ```
 
-3. **Triển khai → Tài nguyên web**, chọn quyền truy cập **Bất kỳ ai**, rồi sao chép URL.
+3. **Triển khai → Tài nguyên web**, đặt đúng hai mục này rồi sao chép URL (đuôi `/exec`):
+   - **Thực thi bằng tên:** *Tôi* — script chạy bằng tài khoản của bạn nên ghi được
+     vào sheet, khách không cần đăng nhập.
+   - **Ai có quyền truy cập:** *Bất kỳ ai* — **không phải** "Bất kỳ ai có Tài khoản
+     Google", vì mục đó vẫn bắt khách đăng nhập.
 4. Dán URL đó vào `CONFIG.formEndpoint` trong `assets/js/main.js`.
 
-Cột `attend` cho biết khách dự tiệc nào: `TP.HCM 28/11`, `Hà Nội 10/12`, `Cả hai`
-hoặc `Không`.
+Kiểm tra trước khi gửi thiệp cho khách: mở thiệp, gửi thử một xác nhận, rồi xem sheet
+có thêm dòng không. Nếu địa chỉ sai quyền, trình duyệt bị đá về trang đăng nhập của
+Google và dòng dữ liệu không bao giờ tới.
+
+Cột **Dự tiệc** cho biết khách dự tiệc nào: `TP.HCM 28/11`, `Hà Nội 10/12`, `Cả hai`
+hoặc `Không` — giữ nguyên tiếng Việt kể cả khi khách xem bản tiếng Anh.
+
+**Sửa mã xong phải triển khai lại thì mới có tác dụng:** Triển khai → Quản lý bản
+triển khai → bấm bút chì → Phiên bản: *Phiên bản mới* → Triển khai. Địa chỉ `/exec`
+giữ nguyên, không cần sửa gì trong `main.js`.
 
 ---
 
