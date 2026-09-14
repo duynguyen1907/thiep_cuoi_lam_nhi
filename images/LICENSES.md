@@ -46,6 +46,17 @@ trình tiệc cưới" đã bỏ ngày 14/09/2026, bốn file vẫn giữ lại 
   thiết kế; tài liệu này không xác nhận thay — **cần xác nhận được phép dùng
   thương mại** trước khi đưa thiệp lên mạng.
 
+## `og-preview.jpg`
+
+Ảnh xem trước hiện lên khi gửi đường dẫn thiệp qua Messenger, Zalo hay Facebook.
+
+- **Kích thước:** 1200×630 px — đúng cỡ Facebook và Zalo mong muốn
+- **Nguồn gốc:** do dự án tự dựng — khung lấy từ `main_bg.jpg`, chữ vẽ bằng HTML/CSS
+  rồi chụp lại. Không có ảnh của bên thứ ba, không vướng bản quyền.
+- **Cách dùng:** thẻ `og:image` trong `index.html`, phải ghi **đường dẫn tuyệt đối**.
+- **Dựng lại:** sửa `tools/og-preview.html` (tên, ngày) rồi chụp lại đúng 1200×630,
+  lưu đè lên file này.
+
 ---
 
 ## Ghi chú

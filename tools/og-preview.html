@@ -1,0 +1,43 @@
+<!doctype html><meta charset="utf-8">
+<!-- Trang dựng ảnh xem trước (og:image) cho Messenger / Zalo / Facebook.
+     Cách dùng: chạy máy chủ tĩnh ở thư mục gốc dự án (python -m http.server 8000),
+     mở http://127.0.0.1:8000/tools/og-preview.html, chụp đúng 1200x630 rồi lưu đè
+     lên images/og-preview.jpg. Sửa tên hoặc ngày ở cuối file này. -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Lora:wght@500;700&family=The+Nautigal&family=Viaoda+Libre&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  .card {
+    width: 1200px; height: 630px; box-sizing: border-box; padding: 80px 120px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border: 1px solid transparent;
+    border-image: url("../images/main_bg.jpg") 200 fill / 150px stretch;
+    color: #511419; text-align: center;
+  }
+  .seal { width: 62px; height: 62px; border-radius: 50%; display: grid; place-items: center; margin-bottom: 20px;
+          background: radial-gradient(circle at 35% 30%, #7a2029, #3a0d11);
+          box-shadow: 0 8px 18px rgba(58,13,17,.35), inset 0 0 0 2px rgba(233,206,158,.25); }
+  .seal svg { width: 26px; height: 26px; fill: #f3e8de; }
+  .eyebrow { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: 21px; letter-spacing: .42em;
+             text-transform: uppercase; color: #7a1f26; margin: 0 0 16px; }
+  .names { font-family: "Viaoda Libre", serif; font-weight: 400; font-size: 84px; line-height: 1.1; margin: 0; }
+  .amp { font-family: "The Nautigal", cursive; font-size: 60px; color: #c9a24a; margin: 0 18px; }
+  .orn { display: flex; align-items: center; justify-content: center; gap: 14px; color: #c9a24a; margin: 26px 0 22px; }
+  .orn span { width: 90px; height: 1px; background: currentColor; opacity: .75; }
+  .orn i { font-style: normal; font-size: 20px; }
+  .dates { display: flex; gap: 46px; align-items: center; }
+  .date b { display: block; font-family: "Lora", serif; font-weight: 700; font-size: 30px; letter-spacing: .06em; }
+  .date small { display: block; font-family: "Lora", serif; font-size: 14px; letter-spacing: .24em;
+                text-transform: uppercase; color: #c9a24a; margin-top: 7px; }
+  .sep { width: 1px; height: 56px; background: #c9a24a; opacity: .8; }
+</style>
+<div class="card">
+  <div class="seal"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.5 6.6 4.5c2.1 0 3.6 1.2 4.4 2.6.8-1.4 2.3-2.6 4.4-2.6 3.6 0 5.7 3.7 4.2 7.2C19.5 16.4 12 21 12 21z"/></svg></div>
+  <p class="eyebrow">Save the date</p>
+  <h1 class="names">Duy Lâm<span class="amp">&amp;</span>Yến Nhi</h1>
+  <div class="orn"><span></span><i>&#10086;</i><span></span></div>
+  <div class="dates">
+    <div class="date"><b>28 . 11 . 2026</b><small>TP. Hồ Chí Minh</small></div>
+    <div class="sep"></div>
+    <div class="date"><b>10 . 12 . 2026</b><small>Hà Nội</small></div>
+  </div>
+</div>

@@ -268,6 +268,16 @@ images/LICENSES.md      Nguồn gốc và giấy phép của ảnh
 Trang hoàn toàn tĩnh nên bật GitHub Pages là chạy được:
 **Settings → Pages → Source: main / root**.
 
-Sau khi có địa chỉ thật, sửa `og:image` trong `index.html` thành đường dẫn đầy đủ
-(ví dụ `https://<tên>.github.io/<repo>/images/main_bg.jpg`) — Zalo và Facebook chỉ
-hiện ảnh xem trước khi đường dẫn là tuyệt đối.
+Trang đang chạy tại https://duynguyen1907.github.io/thiep_cuoi_lam_nhi/
+
+Ảnh hiện lên khi gửi đường dẫn qua Messenger / Zalo / Facebook là
+`images/og-preview.jpg` (1200×630), khai báo trong thẻ `og:image` bằng **đường dẫn
+tuyệt đối** — để đường dẫn tương đối thì các ứng dụng đó không hiện ảnh. Muốn dựng
+lại ảnh (đổi tên, đổi ngày): sửa `tools/og-preview.html`, mở bằng máy chủ tĩnh rồi
+chụp đúng 1200×630, lưu đè lên `images/og-preview.jpg`.
+
+Nếu đổi sang địa chỉ khác, nhớ sửa `og:image` và `og:url` trong `index.html`.
+
+Facebook và Zalo nhớ ảnh xem trước khá lâu. Sau khi đổi, dán đường dẫn vào
+[Sharing Debugger](https://developers.facebook.com/tools/debug/) rồi bấm *Scrape
+Again* để chúng lấy ảnh mới.
