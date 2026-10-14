@@ -230,8 +230,9 @@ Kiểm tra trước khi gửi thiệp cho khách: mở thiệp, gửi thử mộ
 có thêm dòng không. Nếu địa chỉ sai quyền, trình duyệt bị đá về trang đăng nhập của
 Google và dòng dữ liệu không bao giờ tới.
 
-Cột **Dự tiệc** cho biết khách dự tiệc nào: `TP.HCM 28/11`, `Hà Nội 10/12`, `Cả hai`
-hoặc `Không` — giữ nguyên tiếng Việt kể cả khi khách xem bản tiếng Anh.
+Cột **Dự tiệc** cho biết khách dự tiệc nào: `Hôn lễ HCM - 28/11(19h)`,
+`Tiệc mừng HN - 9/12(17h)` (tiệc mời bạn bè, một ngày trước Lễ Thành Hôn),
+hoặc `Hôn lễ HN - 10/12(12h)` — giữ nguyên tiếng Việt kể cả khi khách xem bản tiếng Anh.
 
 ### Trình duyệt trong Messenger, Zalo, Facebook
 
